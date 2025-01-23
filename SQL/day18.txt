@@ -1,0 +1,67 @@
+Q1:
+with cte_revised_salary as
+(
+    select *, (salary+salary*ifnull(commission_pct,0)) as Net_Salary from employees
+)
+select employee_id, first_name, last_name, salary, Net_Salary from cte_revised_salary
+where Net_Salary > 15000
+order by 1;
+
+Q2:
+Q3:
+with cts as (
+select E.employee_id
+from employees E 
+left join salaries S 
+on E.employee_id = S.employee_id
+where S.employee_id is null
+union all
+select S.employee_id
+from employees E
+right join salaries S 
+on E.employee_id = S.employee_id
+where e.employee_id is null
+)
+select * from cts order by 1;
+
+Q4:
+with cte_store1 as
+(
+    select product_id,'store1' as store, store1 as price from products where store1 is not null
+),
+cte_store2 as
+(
+    select product_id,'store2' as store, store2 as price from products where store2 is not null
+),
+cte_store3 as
+(
+    select product_id,'store3' as store, store3 as price from products where store3 is not null
+)
+select * from cte_store1 union all 
+select * from cte_store2 union all
+select * from cte_store3
+order by 1, 2;
+
+Q5:
+Q6:
+create or replace view Manager_details as (
+select distinct E.employee_id, concat(E.first_name,' ',E.last_name) as Manager,E.salary, E.phone_number,
+D.department_id, D.department_name,
+L.street_address, L.city, 
+C.country_name, 
+dense_rank() over(order by salary desc) as Salary_Rank
+from employees M 
+join employees E on M.manager_id = E.employee_id
+join departments D on E.department_id = D.department_id
+join Locations L on D.Location_id = L.Location_id
+join countries C on L.country_id  = C.country_id
+);
+select employee_id, Manager, salary, department_name, city, country_name
+from Manager_details
+where Salary_Rank <=5
+order by 3 DESC, 2;
+
+
+Q7:
+AQ1:
+AQ2:
