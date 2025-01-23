@@ -8,6 +8,57 @@ where Net_Salary > 15000
 order by 1;
 
 Q2:
+WITH CTE_SENIOR AS (
+    SELECT 
+        employee_id, 
+        salary, 
+        SUM(salary) OVER (ORDER BY salary ASC) AS Scumulative_salary,
+        CASE 
+            WHEN (70000 - SUM(salary) OVER (ORDER BY salary ASC)) > 0 THEN 1 
+            ELSE 0 
+        END AS SIndicator
+    FROM candidates
+    WHERE experience = 'Senior'
+    ORDER BY salary
+),
+CTE_JUNIOR AS (
+    SELECT 
+        employee_id, 
+        salary, 
+        SUM(salary) OVER (ORDER BY salary ASC) AS Jcumulative_salary,
+        CASE 
+            WHEN ((SELECT MAX(Scumulative_salary) FROM CTE_SENIOR where SIndicator=1) - SUM(salary) OVER (ORDER BY salary ASC)) > 0 THEN 1 
+            ELSE 0 
+        END AS JIndicator
+    FROM candidates
+    WHERE experience = 'Junior'
+    ORDER BY salary    
+)
+SELECT employee_id 
+FROM CTE_SENIOR 
+WHERE SIndicator = 1
+UNION
+SELECT employee_id 
+FROM CTE_JUNIOR 
+WHERE JIndicator = 1
+order by 1;
+
+
+with cummulative_salary as (
+SELECT *,
+SUM(salary) OVER(PARTITION BY experience ORDER BY salary ASC) AS cummulative_salary
+FROM candidates
+)
+select employee_id 
+#,experience,salary,cummulative_salary 
+from cummulative_salary where experience = 'Senior' and cummulative_salary <= 70000
+union 
+select employee_id
+#,experience,salary, cummulative_salary 
+from cummulative_salary where experience = 'Junior' and 
+cummulative_salary <= 70000 - (select max(cummulative_salary) from cummulative_salary where experience = 'Senior' and cummulative_salary <= 70000)
+order by 1;
+
 Q3:
 with cts as (
 select E.employee_id
@@ -43,6 +94,31 @@ select * from cte_store3
 order by 1, 2;
 
 Q5:
+WITH CTE_PLATFORM_CATEGORY AS 
+(SELECT user_id, spend_date, 
+    SUM(CASE platform WHEN 'mobile' THEN amount ELSE 0 END) mobile,
+    SUM(CASE platform WHEN 'desktop' THEN amount ELSE 0 END) desktop
+FROM Spending
+GROUP BY 1,2)
+SELECT spend_date, 'desktop' platform, 
+    SUM(CASE WHEN desktop > 0 AND mobile = 0 THEN desktop ELSE 0 END) total_amount, 
+    count(CASE WHEN desktop > 0 AND mobile = 0 THEN 1 END) total_users
+FROM CTE_PLATFORM_CATEGORY
+GROUP BY 1
+UNION ALL
+SELECT spend_date, 'mobile' platform, 
+     SUM(CASE WHEN mobile > 0 AND desktop = 0 THEN mobile ELSE 0 END) total_amount, 
+     count(CASE WHEN mobile > 0 AND desktop = 0 THEN 1 END) total_users
+FROM CTE_PLATFORM_CATEGORY
+GROUP BY 1
+UNION ALL
+SELECT spend_date, 'both' platform, 
+    SUM(CASE WHEN desktop > 0 AND mobile > 0 THEN mobile + desktop ELSE 0 END) total_amount, 
+    count(CASE WHEN desktop > 0 AND mobile > 0 THEN 1 END) total_users
+FROM CTE_PLATFORM_CATEGORY
+GROUP BY 1 
+order by 1, 2 ;
+
 Q6:
 create or replace view Manager_details as (
 select distinct E.employee_id, concat(E.first_name,' ',E.last_name) as Manager,E.salary, E.phone_number,
@@ -63,5 +139,20 @@ order by 3 DESC, 2;
 
 
 Q7:
+WITH  CTE_DEPT_AVGSAL as
+(select D.department_name, avg(E.salary) as avg_salary
+from employees E 
+join departments D on E.department_id = D.department_id
+group by 1
+order by 2 desc
+)
+select *,
+NTILE(10) over(order by avg_salary desc) as salary_Decile
+from CTE_DEPT_AVGSAL;
+
 AQ1:
 AQ2:
+
+
+
+
