@@ -1,0 +1,88 @@
+Q1 : 
+select employee_id, 
+if(commission_pct is null, round(0,2), round(commission_pct,2)) as commission_pct
+from employees
+order by employee_id
+
+Q2 : 
+select employee_id, concat(first_name,' ',last_name) as full_name, salary
+from employees 
+where 
+department_id in (
+select distinct department_id from departments
+where lower(department_name) in ('administration','marketing','human resources'))
+order by employee_id
+;
+
+Q3 :
+select * from employees
+where employee_id not in ( select distinct employee_id from job_history)
+order by employee_id;
+
+Q4 :
+select concat(first_name,' ',last_name) as full_name, salary, department_id,job_id
+from employees
+where job_id = ( select job_id from employees where employee_id = 107 )
+order by full_name ;
+
+Q5 :
+select employee_id, salary, 
+case
+when salary > 20000
+then 'Class A'
+when salary between 10000 and 20000
+then 'Class B'
+else 'Class C'
+end as Salary_bin
+from employees
+order by employee_id;
+
+Q6 :
+select employee_id, first_name, last_name, salary,
+case
+when upper(job_id) in ('FI_ACCOUNT','AC_ACCOUNT')
+then 1
+else 0
+end as Accountant
+from employees
+order by employee_id;
+
+Q7 : 
+select x, y, z, 
+case
+when (x+y)>z and (x+z)>y and (y+z)>x
+then 'Yes'
+else 'No'
+end as triangle
+from triangle
+order by x, y, z;
+
+Q8 :
+select round(sum(long_w),4) as sum
+from station
+where long_w > 38.7880 and long_w < 137.2345;
+
+AQ1 : 
+select employeeNumber, firstName, lastName,
+ifnull(email, 'N/A') as email, #ifnull is better to use here but next line has example of if as well.
+if (trim(phone) is null , 'N/A', phone) as phone
+from employees
+order by employeeNumber;
+
+AQ2 :
+select employee_id, first_name, last_name, job_id 
+from employees
+where department_id in 
+(
+    select distinct department_id from departments where location_id in 
+        (
+        select distinct location_id from locations where lower(city) = 'seattle'
+        )
+) order by employee_id ;
+
+AQ3 :
+select count( distinct customer_id) as rich_count
+from store
+where amount > 500;
+
+

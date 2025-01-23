@@ -1,0 +1,194 @@
+Q1 : 
+select account_id, day, 
+sum(signed_amount) over(partition by account_id order by day asc) as balance
+from (
+select 
+*, 
+case
+when type = 'Deposit' then amount
+else (amount*-1)
+end as signed_amount
+from transactions
+) as tbl1
+order by 1,2;
+
+SELECT account_id, day,
+SUM(CASE 
+WHEN type = 'Deposit' THEN amount
+ELSE -amount end)
+OVER(partition by account_id order by day asc) AS balance
+FROM transactions
+ORDER BY account_id, day;
+
+Q2:
+select 
+player_id, event_date,
+sum(games_played) over(partition by player_id order by event_date) as games_played_so_far 
+from activity
+order by 1, 3;
+
+Q3:
+select 
+employee_id, salary,
+lead(salary) over(order by salary) as next_higher_salary,
+(lead(salary) over(order by salary) - salary ) as salary_difference
+from employees
+order by 2,4;
+
+Q4:
+select first_name, first_day_job
+from (
+select E.first_name as first_name, H.start_date ,
+first_value(H.start_date) over (partition by E.employee_id order by H.start_date asc) as first_day_job,
+row_number() over (partition by E.employee_id order by H.start_date asc) as job_rank
+from employees E 
+join job_history H on E.employee_id = H.employee_id
+) as tbl1
+where job_rank = 1
+order by 1;
+
+
+select distinct emp.first_name,
+first_value(jhist.start_date) over(partition by jhist.employee_id 
+order by jhist.start_date) as 'first_day_job'
+from job_history jhist 
+join employees emp 
+on jhist.employee_id = emp.employee_id
+order by emp.first_name;
+
+Q5:
+select 
+order_id
+from (
+select 
+order_id, 
+max(quantity) as order_max,
+max(avg(quantity)) over() as max_avg_order
+from ordersdetails
+group by order_id) as tbl1
+where order_max > max_avg_order
+order by 1;
+
+Q6:
+select C.customerName, sum(amount) as total_amount,
+NTILE(4) over(order by sum(amount) desc) as sales_quartile
+from customers C 
+join payments P on C.customerNumber = P.customerNumber
+group by C.customerName
+order by 2 desc, 3;
+
+Q7:
+select first_name, recent_job from (
+select  E.first_name as first_name, H.start_date,
+first_value(H.start_date) over (partition by E.employee_id order by H.start_date desc) as recent_job,
+row_number() over(partition by E.employee_id order by H.start_date desc) as job_rank
+from employees E 
+join job_history H on E.employee_id = H.employee_id
+) as tbl1
+where job_rank=1
+order by 1 ;
+
+select E.first_name, J.recent_job
+from employees E
+join (
+select 
+distinct employee_id,
+first_value(start_date) over(partition by employee_id order by start_date desc) as recent_job
+from job_history) as J
+on E.employee_id = J.employee_id
+order by 1;
+
+select distinct first_name, first_value(start_date)
+over(partition by jhist.employee_id
+order by start_date desc
+RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) as 'recent_job'
+from job_history jhist
+join employees emp 
+on jhist.employee_id=emp.employee_id
+order by first_name;
+
+
+SELECT first_name, 
+MAX(start_date) AS "recent_job" 
+FROM employees 
+JOIN job_history 
+USING (employee_id) 
+GROUP BY employee_id,first_name 
+ORDER BY first_name;
+
+AQ1:
+SELECT id, visit_date, people
+FROM (
+    SELECT id, visit_date, people, 
+    lead(people) over (order by id asc) as next1, 
+    lead(people,2) over (order by id asc) as next2, 
+    lag(people) over (order by id asc) as prev1, 
+    lag(people,2) over (order by id asc) as prev2 from mall) as mall_ppl
+WHERE 
+    (people >= 100 and next1 >= 100 and next2 >= 100 )
+    or (people >= 100 and prev1 >= 100 and prev2 >= 100) 
+    or (people >= 100 and prev1 >= 100 and next1 >= 100 )
+ORDER BY visit_date;
+
+
+AQ2:
+select 
+first_name, last_name, first_job_sal
+from ( select 
+E.first_name, E.last_name,
+first_value(J.max_salary) over (partition by E.employee_id order by H.start_date) as first_job_sal,
+row_number() over  (partition by E.employee_id order by H.start_date) as sal_rnk
+from employees E 
+join job_history H on E.employee_id = H.employee_id
+join jobs J on H.job_id = J.job_id ) as tbl1
+where sal_rnk = 1
+order by 1;
+
+select distinct first_name, last_name, 
+first_value(max_salary) over (partition by jh.employee_id 
+order by start_date) as 'first_job_sal'
+from job_history jh 
+join employees e on jh.employee_id=e.employee_id
+join jobs j on jh.job_id=j.job_id 
+order by first_name;
+
+AQ3:
+Select 
+tb12.customerNumber, tb12.orderNumber, tb12.productCode, tb12.sales, tbl3.sales as thirdHIghestSales
+from 
+(
+SELECT O.customerNumber as customerNumber, O.orderNumber as ordernumber, OD.productCode as productCode, 
+(OD.quantityOrdered * OD.priceEach) as sales
+from orders O 
+join orderdetails OD on O.orderNumber = OD.orderNumber
+) tb12
+join 
+(
+select customerNumber, sales from (
+SELECT O.customerNumber as customerNumber, O.orderNumber, OD.productCode, 
+(OD.quantityOrdered * OD.priceEach) as sales,
+row_number() over(partition by O.customerNumber order by ( OD.quantityOrdered * OD.priceEach) desc) as rnk_sales
+from orders O 
+join orderdetails OD on O.orderNumber = OD.orderNumber
+) as tbl1
+where rnk_sales = 3
+) tbl3
+on tb12.customerNumber = tbl3.customerNumber
+order by 1, 4 desc;
+
+Select O.customerNumber, O.orderNumber, OD.productCode, (OD.quantityOrdered * OD.priceEach) as sales,
+NTH_VALUE((OD.quantityOrdered * OD.priceEach),3) over(partition by O.customerNumber order by (OD.quantityOrdered * OD.priceEach) desc
+rows between unbounded preceding and unbounded following ) as thirdHighestSales
+from orders O 
+join orderdetails OD on O.orderNumber = OD.orderNumber
+order by 1 , 4 DESC;
+#If we dont use 'rows between unbounded preceding and unbounded follwing' than first two have null values in thirdHIghestSales as
+# default is rows between unbounded preciding and current row_number
+# the first two rows dont have 3 rows to compare and identify value
+
+AQ4 : 
+select productline, productname, MSRP,
+NTH_VALUE(productname, 3) over(partition by productline order by MSRP DESC ) as thirdMostExpensive_Product,
+NTH_VALUE(productname, 5) over(partition by productline order by MSRP DESC ) as fifthMostExpensive_Product
+from products
+order by 1, 3 desc;

@@ -1,0 +1,61 @@
+Q1 : LIMIT
+Q2 : 
+select original_title, tagline, director
+from movies
+order by popularity desc
+limit 5;
+
+Q3 : 
+select * from 
+movies
+order by revenue desc
+limit 2,1;
+
+Q4 : 
+select original_title ,
+round((vote_count/(vote_count+104) * vote_average ) + ( 104 /(104+vote_count)*5.97),2) as Weighted_avg_rating
+from movies 
+order by Weighted_avg_rating desc, original_title asc
+limit 10;
+
+Q5 : 
+select concat('Book Name:',book_name,',Author:',author,',Book price:',book_price) as Book_Description
+from books
+order by Book_Description asc;
+
+Q6 : 
+select emp_id, name, salary,
+round(salary+((salary*20)/100)) as New_Salary
+from employees
+order by emp_id asc;
+
+Q7 : 
+select employee_number, first_name, last_name, salary
+from employees
+order by salary desc
+limit 3,2;
+# limit 3, 2 suggest offset first 3 rows and then display first 2 rows, effectively this will display 4th & 5th row, MYSQL specific syntax.
+# Other than mysql we could have used LIMIT 2 OFFSET 3
+
+Q8 : 
+select *
+from city
+where countrycode = 'JPN'
+order by id asc;
+
+AQ1 : 
+select original_title, 
+round(((revenue-budget)/budget) * 100,2) as Profit_percentage
+from movies
+
+AQ2 : 
+select employee_number,
+concat(upper(substr(first_name,1,1)),lower(substr(first_name,2)),' ',lower(last_name)) as 'Full Name'
+from employees
+order by employee_number;
+
+AQ3 : 
+select name
+from students
+where marks > 75
+order by name, id;

@@ -1,0 +1,10 @@
+Q1 : By creating a third table that has foreign keys to the two original tables.
+Q2 : c, f,d
+Q3 : many to many
+Q4 : Create
+Q5 : select * from movies;
+Q6 : select city, state from station;
+Q7 : SELECT * FROM olympic order by gold_medals desc, silver_medals desc, bronze_medals desc, country;
+AQ1 : one to many
+AQ2 : DDL commands are used to create and modify database objects.
+AQ3 : SELECT original_title FROM movies order by popularity desc, revenue desc; 

@@ -1,0 +1,183 @@
+Q1 : 
+select home_team.team_name as home_team, away_team.team_name as away_team
+from (
+( select team_name from teams ) as home_team
+cross join 
+( select team_name from teams) as away_team 
+)
+where home_team.team_name != away_team.team_name
+order by 1, 2
+
+SELECT
+h.team_name AS home_team,
+a.team_name AS away_team
+FROM teams AS h
+CROSS JOIN teams AS a
+WHERE h.team_name != a.team_name
+ORDER BY home_team, away_team; 
+
+
+Q2 : 
+
+select
+tbl2.follower,tbl1.follower_count as num
+from (
+( select 
+followee, count(*) as follower_count
+from follow
+group by 1 ) as tbl1
+join ( 
+select 
+follower, count(*) as followee_count
+from follow
+group by 1 ) as tbl2
+on tbl1.followee = tbl2.follower 
+) 
+where followee_count >= 1 and follower_count >= 1
+order by 1;
+
+
+select followee follower, 
+count(follower) as num
+from follow
+where followee in (select follower from follow)
+and followee in (select followee from follow)
+group by followee
+order by follower;
+
+
+select f1.follower, 
+count(distinct f2.follower) as num
+from follow f1
+inner join follow f2 
+on f1.follower = f2.followee
+group by f1.follower
+order by f1.follower;
+
+Q3:
+select  
+tbl1.first_col, tbl12.second_col
+from (
+( select first_col , row_number() over (order by first_col asc) as rnk_first_col
+from data ) as tbl1
+join 
+( select second_col, row_number() over (order by second_col desc) as rnk_second_col
+from data ) as tbl12
+on tbl1.rnk_first_col = tbl12.rnk_second_col)
+
+SELECT first_col, second_col
+FROM (
+SELECT first_col, ROW_NUMBER() OVER(ORDER BY first_col ASC) AS r
+FROM data
+)a JOIN(
+SELECT second_col, ROW_NUMBER() OVER(ORDER BY second_col DESC) AS r
+FROM data)b
+ON a.r = b.r;
+
+Q4 : 
+select tbl.employee_id, tbl.first_name, tbl.job_id
+from 
+(select 
+employee_id, first_name, job_id,
+dense_rank() over(partition by job_id order by salary desc) as sal_rnk
+from employees ) as tbl
+where sal_rnk = 5
+order by 1;
+
+Q5:
+select 
+score, 
+dense_rank() over(order by score desc) as 'rank'
+from scores
+order by 1 DESC;
+
+Q6:
+select 
+concat(first_name,' ',last_name) as full_name,
+department_id,
+salary,
+row_number() over (partition by department_id order by salary desc) as emp_row_no,
+rank() over (partition by department_id order by salary desc) as emp_rank,
+dense_rank() over (partition by department_id order by salary desc) as emp_dense_rank
+from employees
+order by 2, 3 DESC;
+
+Q7:
+select 
+company_id, employee_id, employee_name,
+case
+when max(salary) over(partition by company_id) < 1000 then round(salary)
+when max(salary) over(partition by company_id) between 1000 and 10000 then round(salary - (salary * 0.24))
+when max(salary) over(partition by company_id) > 10000 then round(salary - (salary * 0.49))
+end as salary
+from salaries
+order by 1, 2;
+
+select company_id, employee_id, employee_name,
+round(case
+    when max(salary) over(partition by company_id) < 1000 then salary
+    when max(salary) over(partition by company_id) between 1000 and 10000 then salary - (salary * 0.24) 
+    else salary - (salary * 0.49)
+end,0) salary
+from salaries 
+order by company_id, employee_id;
+
+AQ1:
+select employee_id, first_name, last_name, department_id, salary
+from 
+( 
+select 
+employee_id, first_name, last_name, department_id, salary,
+avg(salary) over (partition by department_id) as dept_avg_sal 
+from employees
+) as tbl1
+where salary < dept_avg_sal
+order by 1;
+
+SELECT e.employee_id, e.first_name,e.last_name, e.department_id, e.salary
+FROM employees e
+JOIN (
+ SELECT department_id, AVG(salary) AS avg_salary
+ FROM employees
+ GROUP BY department_id
+) AS dept_avg 
+ON e.department_id = dept_avg.department_id
+WHERE e.salary < dept_avg.avg_salary
+ORDER BY employee_id;
+
+SELECT employee_id, first_name, last_name, department_id, salary
+FROM employees e1
+WHERE salary < (SELECT AVG(salary) 
+FROM employees e2 
+WHERE e2.department_id = e1.department_id)
+ORDER BY employee_id;
+
+AQ2:
+select customer_name, customer_id, order_id, order_date 
+from (
+select c.name as customer_name, C.customer_id, O.order_id, O.order_date,
+dense_rank() over (partition by C.customer_id order by O.order_date desc) as Order_Rank
+from customers C 
+join orders O on C.customer_id = O.customer_id
+) as tbl1
+where Order_Rank <=3
+order by 1, 2, 4 DESC;
+
+AQ3:
+select employee_id, name, salary, 
+dense_rank() over( order by salary asc) as team_id 
+from employees where salary in (
+select salary
+from employees
+group by salary
+having count(*) > 1
+order by salary desc);
+
+select *, dense_rank() over(order by salary) as team_id
+from employees
+where salary not in(
+select salary
+from employees
+group by salary
+having count(*) = 1)
+order by team_id, employee_id;

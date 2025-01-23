@@ -1,0 +1,136 @@
+Q1 : 
+select round(max(lat_n),4) as max from
+station 
+where lat_n < 138.2523;
+
+Q2: 
+select (salary * months) as earnings, count(*) AS num_employees
+from employee
+group by 1
+order by 1 desc
+limit 1;
+
+Q3 : Option A
+SELECT cate_id, SUM(receive_qty*purch_price)   
+FROM purchase              
+GROUP BY cate_id; 
+
+Q4 : 
+select max(num) as num
+from (
+select num
+from mynumbers 
+group by 1
+having count(*) = 1) as num
+
+Q5 : 
+select actor_id, director_id
+from actordirector
+group by 1, 2
+having count(*) >= 3
+order by 1;
+
+Q6 : 
+select * from employees where salary = (
+select max(salary) from employees where salary <
+(select max(salary) from employees where salary <
+(select max(salary) from employees)));
+
+Q7 : 
+select concat(first_name,' ',last_name) as full_name
+from employees where employee_id in (
+select 
+manager_id
+from employees
+group by 1
+having count(employee_id) >=4 )
+order by full_name;
+
+Q8 :
+select * from departments
+where department_id in 
+(
+select department_id
+from employees
+group by 1
+having min(salary) >= 9000
+)
+order by department_id ;
+
+------------
+
+AQ1 :
+select candidate_id
+from candidates
+where lower(skill) in ('python','tableau','mysql')
+group by 1
+having count(*) = 3
+order by 1;
+
+Approach 1:
+
+SELECT candidate_id
+FROM candidates
+WHERE skill IN ('Python', 'Tableau', 'MySQL')
+GROUP BY candidate_id
+HAVING COUNT(DISTINCT skill) = 3
+ORDER BY candidate_id;
+
+Approach 2:
+
+SELECT candidate_id 
+FROM
+(SELECT candidate_id, COUNT(*) AS skills 
+ FROM candidates
+ WHERE skill IN ('Python','Tableau','MySQL')
+ GROUP BY candidate_id) a
+WHERE skills = 3
+ORDER BY candidate_id;
+
+
+AQ2 : 
+
+select query_name, 
+round(sum(rating/position)/count(query_name),2) as quality,
+round(sum(case when rating < 3 then 1 else 0 end)*100/count(query_name),2) as poor_query_percentage
+from queries
+group by query_name
+ORDER BY query_name;
+
+SELECT
+query_name,
+ROUND(AVG(rating/position), 2) AS quality,
+ROUND(AVG(rating < 3)*100, 2) AS poor_query_percentage
+FROM queries
+GROUP BY query_name
+ORDER BY query_name;
+
+AQ 3: 
+
+select Department, No_of_employees,
+case
+when No_of_employees = 1 then 'Junior Department'
+when No_of_employees between 2 and 4 then 'Intermediate Department'
+else 'Senior Department'
+end as Department_level
+from
+(
+select department_id as Department,
+count(*) as No_of_employees
+from employees
+group by 1
+order by 2 
+) as emp_count
+order by No_of_employees, Department
+;
+
+select department_id as Department, 
+count(*) as No_of_employees,
+case 
+when count(*)=1 then "Junior Department"
+when count(*)<=4 then "Intermediate Department"
+when count(*)> 4 then "Senior Department"
+end as Department_level
+from employees
+group by department_id 
+order by No_of_employees,Department ;

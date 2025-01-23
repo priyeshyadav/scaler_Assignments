@@ -1,0 +1,1 @@
+This repo will conatain solution for all Scaler Assignments.

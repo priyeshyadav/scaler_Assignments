@@ -1,0 +1,122 @@
+Q1 : 
+select P.product_name , S.year, S.price
+from sales as S 
+join product as P 
+on S.product_id = P.product_id
+where S.product_id is not null
+order by 2,1;
+
+Q2 : 
+select distinct title
+from Content C 
+join TVProgram T on 
+C.Content_id = T.Content_id
+where T.program_date like '2020-06-%'
+and upper(C.Kids_content) = 'Y' and lower(C.content_type)= 'movies' 
+order by 1;
+
+Q3 : 
+select C.name
+from 
+city C 
+join country CO on C.countrycode = CO.code 
+where lower(CO.continent) = 'africa'
+order by 1;
+
+Q4 : 
+select
+d.department_id, d.department_name
+from 
+departments d 
+left join 
+employees e 
+on d.department_id = e.department_id
+where e.department_id is null
+order by 1;
+
+
+Q5 : 
+select E.name, B.bonus
+from employee E 
+left join bonus B 
+on E.empId = B.empId
+where B.empId is null or B.bonus < 1000
+order by 2;
+
+Q6 : 
+select E.employeeNumber, E.firstName, E.lastName 
+from 
+employees E 
+left join customers C 
+on E.employeeNumber = C.salesRepEmployeeNumber
+where C.salesRepEmployeeNumber is null
+order by 1;
+
+Q7 : 
+select E.employee_id, E.first_name, E.last_name,  D.department_id, D.department_name
+from 
+employees E 
+right join departments D 
+on E.department_id = D.department_id
+order by 1,4,2;
+
+Q8 : 
+select distinct S.buyer_id
+from Sales S 
+join Product P on S.product_id = P.product_id
+where lower(P.product_name) = 's8'
+and S.buyer_id not in 
+(
+select distinct S.buyer_id 
+from Sales S 
+join Product P on S.product_id = P.product_id
+where lower(P.product_name) = 'iphone'
+)
+order by 1;
+
+# id product_id is exact column name present in both tables than we can use USING
+SELECT DISTINCT buyer_id
+FROM Sales JOIN Product USING(product_id)
+WHERE product_name = 'S8' 
+AND buyer_id NOT IN 
+ ( SELECT DISTINCT buyer_id
+   FROM Sales JOIN Product USING(product_id)
+   WHERE product_name = 'iPhone' )
+ORDER BY buyer_id;
+
+-- Additional Questions -- 
+AQ1: 
+select 
+P.productCode, P.productName, PL.textDescription
+from products P 
+left join productlines PL 
+on P.productLine = PL.productLine
+order by 1;
+
+AQ2 : 
+select distinct session_id from Playback 
+where session_id not in (
+select distinct session_id
+from Playback P 
+left join  Ads A 
+on P.customer_id = A.customer_id
+where A.timestamp between P.start_time and P.end_time)
+order by 1;
+
+select session_id
+from Playback p
+left join Ads a 
+on a.customer_id = p.customer_id and 
+a.timestamp between p.start_time and p.end_time
+where a.customer_id is null
+order by session_id;
+
+SELECT distinct session_id
+FROM Playback p
+LEFT JOIN Ads a 
+ON a.customer_id = p.customer_id
+WHERE a.timestamp NOT BETWEEN p.start_time AND p.end_time OR a.customer_id IS NULL
+ORDER BY session_id;
+
+AQ3 : 
+Returns all employees, even if they don't belong to any department

@@ -1,0 +1,71 @@
+Q1 : 
+select original_title
+from 
+movies
+where release_year > 2014 and vote_average > 7
+order by original_title ;
+
+Q2 : 
+SELECT name, population, area
+from world
+where area >= 3000000 or population >= 25000000
+order by name;
+
+Q3 : 
+select orderNumber, requiredDate
+from orders
+where orderDate like '2003-12-%' 
+and status = 'Shipped'
+order by orderNumber
+
+Q4 : 
+select * from 
+employees
+where lower(last_name) = 'king' or lower(last_name) = 'taylor' or lower(last_name) = 'grant'
+order by employee_id ;
+
+Q5 : 
+select original_title,director,genres,cast,budget,revenue, runtime,vote_average
+from movies
+where lower(keywords) like '%sport%' or lower(keywords) like '%sequel%' or lower(keywords) like '%suspense%'
+order by original_title;
+
+
+Q6 : 
+select * from job_history
+where employee_id != 101
+order by employee_id, job_id;
+
+Q7 : 
+select distinct author_id as id
+from views
+where author_id = viewer_id
+order by id ;
+
+Q8 : 
+select employee_id, first_name, last_name, salary
+from employees
+where department_id in ( 50,10,80)
+and salary between 5000 and 10000
+and commission_pct is null
+order by employee_id;
+
+AQ1 : 
+select employee_id,
+concat(first_name,' ',last_name) as full_name,
+phone_number
+from employees
+where lower(first_name) like '%n';
+
+AQ2 : 
+select employee_id, first_name, last_name, job_id,manager_id
+from employees
+where department_id is null
+order by employee_id;
+
+AQ3 : 
+select distinct user_id
+from purchases
+where time_stamp between '2022-03-08' and '2022-03-20'
+and amount >=1000
+order by user_id;

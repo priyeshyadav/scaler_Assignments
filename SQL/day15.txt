@@ -1,0 +1,114 @@
+Q1:
+select 
+employee_id, first_name, last_name,
+round((datediff(str_to_date('2022-06-08','%Y-%m-%d'),hire_date)/365),2) as Total_years
+from employees
+where round((datediff(str_to_date('2022-06-08','%Y-%m-%d'),hire_date)/365),2) > 28
+order by 1;
+
+select employee_id, first_name, last_name, 
+ROUND(DATEDIFF('2022-06-08', hire_date)/365,2) 'Total_years' 
+from employees 
+where DATEDIFF('2022-06-08', hire_date)/365 >= 28
+order by employee_id;
+
+A2 : 
+select employee_id, first_name, last_name, salary, hire_date,
+extract(DAY from hire_date) as Day,
+extract(MONTH from hire_date) as Month,
+extract(YEAR from hire_date) as Year
+from
+employees
+where 
+extract(MONTH from hire_date) = 1 
+and extract(YEAR from hire_date) = 2000
+and salary > 5000
+order by 1;
+
+A3 : 
+SELECT Date('2019-08-06 08:10:12')
+
+A4 : 
+select E.employee_id, E.first_name, E.last_name, E.salary, D.department_name, E.hire_date, L.city
+from employees E 
+join departments D on E.department_id = D.department_id
+join locations L on D.location_id = L.location_id
+where E.hire_date between str_to_date('1998-01-01','%Y-%m-%d') and date_add(str_to_date('1998-01-01','%Y-%m-%d'), INTERVAL 90 DAY)
+order by 1;
+
+A5 : 
+select trim(lower(product_name)) as product_name,
+date_format(sale_date,'%Y-%m') as sale_date,
+count(*) as total
+from sales
+group by 1,2
+order by 1, 2 ;
+
+A6  : 
+select 
+user_id, sum(number_of_comments) as comments_count
+from fb_comments 
+where created_at between date_sub('2020-02-10', interval 30 day) and '2020-02-10'
+group by user_id
+having comments_count > 0
+order by 1;
+
+A7 : 
+SELECT DISTINCT emp.employee_id, emp.first_name, emp.last_name, emp.salary, department_name, 
+DATEDIFF('2022-06-08', emp.hire_date)/365 'Experience'
+FROM employees emp JOIN employees mng ON emp.employee_id = mng.manager_id JOIN departments dep ON dep.department_id = emp.department_id
+WHERE DATEDIFF('2022-06-08', emp.hire_date)/365 > 25
+ORDER BY emp.employee_id;
+
+A8 : 
+SELECT employee_id, first_name, last_name, salary, hire_date, department_id
+FROM (
+    SELECT employee_id, first_name, last_name, salary, hire_date, department_id, 
+    DENSE_RANK() OVER (PARTITION BY department_id ORDER BY salary DESC) AS 'Salary_rank' 
+FROM employees WHERE hire_date BETWEEN DATE_SUB('1998-01-01', INTERVAL 6 MONTH) AND '1998-01-01'
+) tbl1
+WHERE Salary_rank = 1
+ORDER BY 6,1;
+
+AQ1:
+SELECT year(hire_date) 'Year', count(employee_id) 'Employees_count'
+FROM employees
+GROUP BY Year
+ORDER BY Employees_count DESC, Year ASC;
+
+select extract(year from hire_date) 'Year', 
+count(employee_id) 'Employees_count' 
+from employees 
+group by Year 
+order by Employees_count desc, Year asc;
+
+AQ2:
+Select distinct user_id
+from (
+select 
+user_id,
+timestampdiff(SECOND, 
+lag(time_stamp) over(partition by user_id order by time_stamp),time_stamp) as TimeDiffIndicator
+from confirmations ) as tbl1
+where TimeDiffIndicator <= (24*60*60)
+
+
+AQ3:
+select distinct total_work.employee_id
+#, total_work.worked_hours, E.needed_hours
+from (
+select employee_id, sum(ceil(timestampdiff(second, in_time, out_time)/3600)) as worked_hours
+from logs
+group by employee_id) as total_work
+left join employees E on total_work.employee_id = E.employee_id
+where total_work.worked_hours < E.needed_hours
+order by 1;
+
+SELECT E.employee_id
+FROM employees E
+LEFT JOIN logs L 
+ON E.employee_id = L.employee_id
+GROUP BY E.employee_id, E.needed_hours
+HAVING
+(SUM(CEIL(IFNULL(TIMESTAMPDIFF(SECOND, L.in_time, L.out_time),0) / 60)) / 60) < E.needed_hours
+ORDER BY E.employee_id;

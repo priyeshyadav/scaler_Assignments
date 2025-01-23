@@ -1,0 +1,12 @@
+Q1 Data
+Q2 Char(1)
+Q3 BigQuery
+Q4 Transfer data form accounting source to database
+Q5 Student ID
+Q6 Primary key can contain null value, Primary key is used for relation b/w two table, Boolean value can be primary key
+Q7 Foreign Key
+Q8 a,c,e
+AQ1 : all of above
+AQ2 : the customer_id field in the Orders table is FOREIGN KEY. , The id field in the Customers table is PRIMARY KEY.
+AQ3 : Foreign keys must be of the same data type as the primary key they reference.
+
