@@ -151,7 +151,21 @@ NTILE(10) over(order by avg_salary desc) as salary_Decile
 from CTE_DEPT_AVGSAL;
 
 AQ1:
+
+
 AQ2:
+create or replace view emp_view as 
+(
+    select E.employee_id, E.first_name, E.last_name, E.salary, 
+    D.department_id, D.department_name, 
+    L.location_id, L.street_address, L.city 
+    from employees E 
+    join departments D on E.department_id = D.department_id
+    join locations L on D.location_id = L.location_id
+
+);
+select * from emp_view where lower(city) in ('seattle','southlake')
+order by employee_id;
 
 
 
