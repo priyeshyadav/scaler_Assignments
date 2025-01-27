@@ -1,0 +1,67 @@
+Q1: To improve the performance of the query by reducing its execution time
+
+Q2: 
+SELECT DATE_FORMAT(day, '%W, %M %d, %Y') AS day
+from days
+order by 1 ASC;
+
+Q3: Add 10 days to the given date
+
+Q4:
+select 
+D.dept_name, 
+sum(case when s.dept_id is not null then 1 else 0 end) as student_number
+from
+department D
+left join student S
+on D.dept_id = S.dept_id
+group by 1
+order by 2 desc, 1;
+
+Q5:
+
+    select E.employee_id, concat(E.first_name,' ',e.last_name) as full_name, J.job_title
+    from job_history JH
+    join jobs J on JH.job_id = J.job_id
+    join employees E on e.employee_id = JH.employee_id
+    where datediff(JH.end_date, JH.start_date) <= 365
+    order by 1, 3;
+
+Q6:
+with CTE_2020_logins as
+(
+    select user_id, time_stamp,
+    rank() over(partition by user_id order by time_stamp desc) as login_stamp_rnk
+    from logins 
+    where extract(year from time_stamp) = 2020 
+    
+)
+select user_id, time_stamp as last_stamp from CTE_2020_logins
+where login_stamp_rnk = 1
+order by 1;
+
+Q7:
+select orderNumber, orderDate, date_Add(orderDate, interval 30 DAY) as order_date_plus_30_days
+from orders
+order by 1;
+
+Q8:
+SELECT 
+    employee_id, 
+    first_name, 
+    department_id, 
+    job_id, 
+    salary, 
+    NTILE(4) OVER (ORDER BY salary ASC) AS Quartile
+FROM 
+    employees
+ORDER BY 
+    Quartile ASC, 
+    salary ASC, 
+    employee_id ASC;
+
+
+AQ1:
+
+AQ2:
+
