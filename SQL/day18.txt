@@ -151,6 +151,26 @@ NTILE(10) over(order by avg_salary desc) as salary_Decile
 from CTE_DEPT_AVGSAL;
 
 AQ1:
+WITH CTE_NAME_PRODUCT AS 
+(
+    SELECT O.*, p.product_name 
+    FROM orders O 
+    JOIN products P ON O.product_id = P.product_id
+),
+CTE_PRODUCT_COUNT AS
+(
+    SELECT customer_id, product_id, product_name, COUNT(*) AS product_count 
+    FROM CTE_NAME_PRODUCT
+    GROUP BY customer_id, product_id, product_name
+),
+CTE_RANK AS
+(
+    SELECT customer_id, product_id, product_name,
+           RANK() OVER (PARTITION BY customer_id ORDER BY product_count DESC) AS PRD_RNK
+    FROM CTE_PRODUCT_COUNT
+)
+SELECT customer_id, product_id, product_name from CTE_RANK where PRD_RNK = 1
+order by 1, 2
 
 
 AQ2:
@@ -166,7 +186,4 @@ create or replace view emp_view as
 );
 select * from emp_view where lower(city) in ('seattle','southlake')
 order by employee_id;
-
-
-
 
