@@ -1,0 +1,10 @@
+Q1 : RENAME
+Q2 : Deletes the table movies.
+Q3 : Adds the column Industry in the movies table.
+Q4 : UPDATE Company SET Name = ‘Scaler Academy’ WHERE Name = ‘Scaler’
+Q5 : CREATE TABLE Movies
+Q6 : INSERT INTO People VALUES ('Ross', 'Geller')
+Q7 : TRUNCATE
+Q8 : ALTER TABLE mytable RENAME COLUMN oldcolumn TO new_column;
+AQ1 : 
+AQ2 : 
