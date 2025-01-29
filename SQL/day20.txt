@@ -6,5 +6,5 @@ Q5 : CREATE TABLE Movies
 Q6 : INSERT INTO People VALUES ('Ross', 'Geller')
 Q7 : TRUNCATE
 Q8 : ALTER TABLE mytable RENAME COLUMN oldcolumn TO new_column;
-AQ1 : 
-AQ2 : 
+AQ1 : CHAR stores fixed-length strings, while VARCHAR stores variable-length strings.
+AQ2 : ALTER TABLE users ADD email VARCHAR(50);
