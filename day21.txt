@@ -1,0 +1,155 @@
+Q1 : 
+        SELECT DISTINCT d.department_name
+        FROM departments d
+        WHERE EXISTS (
+            SELECT 1
+            FROM employees e1
+            JOIN employees e2 ON e1.manager_id = e2.employee_id
+            WHERE e1.department_id = d.department_id
+            AND e1.salary > e2.salary
+        )
+        ORDER BY d.department_name ASC;
+
+
+        SELECT DISTINCT D.department_name
+        FROM departments D
+        WHERE EXISTS (
+            SELECT 1
+            FROM employees E
+            WHERE E.department_id = D.department_id
+            AND E.salary > (
+                SELECT M.salary
+                FROM employees M
+                WHERE M.employee_id = E.manager_id
+            )
+        ) order by 1;
+
+
+Q2 : 
+        SELECT DISTINCT d.department_id, d.department_name
+        FROM departments d
+        WHERE EXISTS (
+            SELECT 1
+            FROM employees e
+            WHERE e.department_id = d.department_id
+            AND e.salary > (
+                SELECT AVG(salary)
+                FROM employees
+                WHERE department_id = e.department_id
+            )
+            AND e.salary < (
+                SELECT MAX(salary)
+                FROM employees
+                WHERE department_id = e.department_id
+            )
+        )
+        ORDER BY d.department_id ASC;
+
+
+        select D.department_id, D.department_name
+        from departments D 
+        where EXISTS
+        (
+        select 1 from employees E where E.department_id = D.department_id
+        and E.salary > 
+        (
+            select avg(salary) from employees E1 where E1.department_id = E.department_id
+        )
+        and E.salary <
+        (
+            select max(salary) from employees E2  where E2.department_id = E.department_id
+        )
+        ) order by 1;
+
+Q3 : 
+        SELECT order_id
+        FROM orders o
+        WHERE EXISTS (
+        SELECT 1
+        FROM products p
+        WHERE o.product_id = p.product_id
+        AND p.category = 'Electronics');
+Q4 :
+        select orderNumber, productCode
+        from orderdetails
+        where quantityOrdered < ALL(select distinct quantityOrdered from orderdetails where orderLineNumber = 4)
+        order by 1;
+
+Q5 :
+        select P.productcode
+        from products P 
+        where P.buyPrice < ANY
+            (
+            select P1.buyPrice from products P1 where P.productLine = P1.productLine
+            ) 
+        order by 1;
+
+Q6 : 
+        SELECT d.department_name, GROUP_CONCAT(e.last_name SEPARATOR ', ') AS last_names
+        FROM departments d
+        INNER JOIN employees e ON d.department_id = e.department_id
+        GROUP BY d.department_id
+        HAVING COUNT(*) > 1;
+
+Q7  :
+        SELECT P.post_id,
+        CASE WHEN COUNT(DISTINCT K.topic_id) = 0
+            THEN  'Ambiguous!'
+            ELSE GROUP_CONCAT(DISTINCT K.topic_id ORDER BY K.topic_id  SEPARATOR',')
+            END AS topic
+        FROM
+        Posts P LEFT JOIN Keywords K
+        ON
+        LOWER(P.content) LIKE CONCAT('% ', LOWER(K.word), ' %') OR
+        LOWER(P.content) LIKE CONCAT('% ', LOWER(K.word)) OR
+        LOWER(P.content) LIKE CONCAT(LOWER(K.word), ' %')
+        GROUP BY P.post_id
+        ORDER BY P.post_id;
+
+Q8  :
+        select e.employee_id, e.employee_name, e.employee_salary as current_salary,
+        round(e.employee_salary + coalesce(b.incentive_amount, b.special_bonus, e.employee_salary * 0.08),2) as updated_salary_with_incentive_amount
+        from employee e
+        left join bonus b on e.employee_id = b.employee_id
+        order by 1;
+
+Q9 :
+        select 
+        employee_id,  date, count(*) as occurrences
+        from employee_attendance
+        group by employee_id, employee_name, date
+        having occurrences > 1
+        order by 1,2;
+
+AQ1 :
+
+        select M.employee_id, M.first_name, M.last_name, M.salary as manager_salary
+        from employees M 
+        where EXISTS
+            (
+                select 1 from employees E where E.manager_id = M.employee_id 
+                and E.salary > M.salary/2
+                    
+            );
+AQ2 :
+
+        SELECT P.productCode
+        FROM products P
+        WHERE P.buyprice > ALL (
+            SELECT S.buyprice
+            FROM products S
+            WHERE S.productLine = 'Ships'
+            AND S.productCode <> P.productCode
+        )
+        AND P.productLine = 'Ships';
+
+AQ3 :
+        SELECT productName, productCode
+        FROM products
+        WHERE productCode = ANY
+        (SELECT DISTINCT productCode
+        FROM orderdetails
+        WHERE quantityOrdered > 60)
+        ORDER BY productCode;
+
+AQ4 : 
