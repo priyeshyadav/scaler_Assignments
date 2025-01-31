@@ -1,0 +1,14 @@
+Q1: To improve the performance of database queries by speeding up data retrieval.
+Q2: CREATE INDEX
+Q3: Improving query performance and data management
+Q4: i - 4, ii - department_id, iii - List partition
+Q5: To perform complex calculations and return a single result.
+Q6: SELECT function_name()
+Q7: To execute precompiled collection of one or more SQL statements and not return any value.
+Q8: 
+    CREATE PROCEDURE update_product_price (IN product_code VARCHAR(10), IN new_price DECIMAL(10, 2))
+    BEGIN
+    UPDATE products
+    SET price = new_price
+    WHERE product_code = product_code;
+    END;
