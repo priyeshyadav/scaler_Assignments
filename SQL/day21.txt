@@ -106,6 +106,40 @@ Q7  :
         GROUP BY P.post_id
         ORDER BY P.post_id;
 
+
+        WITH matched_topics AS (
+            SELECT
+                p.post_id,
+                k.topic_id
+            FROM
+                posts p
+            LEFT JOIN
+                keywords k
+            ON
+                LOWER(p.content) LIKE CONCAT('%', LOWER(k.word), '%')
+        ),
+        grouped_topics AS (
+            SELECT
+                post_id,
+                GROUP_CONCAT(DISTINCT topic_id ORDER BY topic_id) AS topic_list
+            FROM
+                matched_topics
+            GROUP BY
+                post_id
+        )
+        SELECT
+            p.post_id,
+            COALESCE(gt.topic_list, 'Ambiguous!') AS topic
+        FROM
+            posts p
+        LEFT JOIN
+            grouped_topics gt
+        ON
+            p.post_id = gt.post_id
+        ORDER BY
+            p.post_id;
+
+
 Q8  :
         select e.employee_id, e.employee_name, e.employee_salary as current_salary,
         round(e.employee_salary + coalesce(b.incentive_amount, b.special_bonus, e.employee_salary * 0.08),2) as updated_salary_with_incentive_amount
@@ -153,3 +187,28 @@ AQ3 :
         ORDER BY productCode;
 
 AQ4 : 
+        SELECT
+            CONCAT(
+                GROUP_CONCAT(
+                    CASE
+                        WHEN power = 0 THEN 
+                            CASE 
+                                WHEN factor > 0 THEN CONCAT('+', factor)
+                                ELSE CONCAT('-', ABS(factor))
+                            END
+                        WHEN power = 1 THEN 
+                            CASE 
+                                WHEN factor > 0 THEN CONCAT('+', factor, 'X')
+                                ELSE CONCAT('-', ABS(factor), 'X')
+                            END
+                        ELSE 
+                            CASE 
+                                WHEN factor > 0 THEN CONCAT('+', factor, 'X^', power)
+                                ELSE CONCAT('-', ABS(factor), 'X^', power)
+                            END
+                    END
+                    ORDER BY power DESC SEPARATOR ''
+                ),
+                '=0'
+            ) AS equation
+        FROM terms;
