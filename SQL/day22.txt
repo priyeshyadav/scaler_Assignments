@@ -12,3 +12,13 @@ Q8:
     SET price = new_price
     WHERE product_code = product_code;
     END;
+
+AQ1: DROP INDEX
+AQ2: Yes, a Stored Procedure can insert, update, or delete data in a database.
+AQ3: 
+        CREATE FUNCTION calculate_sum (num1 INT, num2 INT) RETURNS INT  
+        BEGIN  
+            DECLARE result INT;  
+            SET result = num1 + num2;  
+            RETURN result;  
+        END;
