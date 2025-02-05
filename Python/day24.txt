@@ -26,6 +26,11 @@ Q3 :
     print('D')
     print('E')
 
+    or 
+
+    print('A','B','C','D','E', sep='\n')
+
+    
 Q4 : 
     saving = int(input())
     spent = int(input())
