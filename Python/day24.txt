@@ -1,0 +1,37 @@
+Q1 : 
+    def main():
+        name = input()
+        print('Hello',name) 
+
+    return 0
+
+    if __name__ == '__main__':
+        main()
+
+Q2 : 
+    def main():
+        print(6+3)
+        print(6-3)
+        print(6*3)
+        print(6/3)
+        return 0
+
+    if __name__ == '__main__':
+        main()
+
+Q3 : 
+    print('A')
+    print('B')
+    print('C')
+    print('D')
+    print('E')
+
+Q4 : 
+    saving = int(input())
+    spent = int(input())
+    print(saving-spent)
+
+Q5 : 
+    name1 = input()
+    name2 = input()
+    print(name1,'says Hi to',name2)
