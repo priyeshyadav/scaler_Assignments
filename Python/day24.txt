@@ -40,3 +40,45 @@ Q5 :
     name1 = input()
     name2 = input()
     print(name1,'says Hi to',name2)
+
+
+AQ1 :
+total_time=40
+time_in_oven=int(input())
+print(total_time-time_in_oven)
+
+AQ2:
+def main():
+    time_for_each_layer = 2
+    no_of_layer = int(input())
+    print(time_for_each_layer*no_of_layer)
+
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+AQ3:
+time_per_layer = 2
+no_of_layer = int(input())
+time_in_oven=int(input())
+print(time_per_layer * no_of_layer + time_in_oven)
+
+AQ4:
+billvalue = int(input())
+billnumber = int(input())
+print(billvalue * billnumber)
+
+AQ5:
+13.56
+
+AQ6:
+str1 = input()
+str2 = input()
+print(str1+str2)
+
+or 
+
+str1 = input()
+str2 = input()
+print(str1,str2,sep='')
