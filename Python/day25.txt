@@ -1,0 +1,25 @@
+Q1:
+print(9)
+
+Q2:
+a = 0 
+b = 1 
+c = 0 
+
+# DO NOT CHANGE THIS
+x = a < b + c
+
+print(x) # this should be True
+
+Q3:
+budget = float(input())
+single_bill = int(input())
+print(int(budget//single_bill))
+
+Q4:
+varun_number = 1234880990
+number = int(input())
+print(bool(number<varun_number))
+
+Q5:
+5423
