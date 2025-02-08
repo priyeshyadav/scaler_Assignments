@@ -23,3 +23,26 @@ print(bool(number<varun_number))
 
 Q5:
 5423
+
+AQ1:
+True
+
+AQ2:
+False
+
+AQ3:
+5.0
+
+AQ4:
+citizenship = input()
+age = int(input())
+print(citizenship == 'Indian' and age >=18)
+
+or
+
+citizenship = input()
+age = int(input())
+print(citizenship.lower() == 'indian' and age >=18)
+
+AQ5:
+print(A%B)
