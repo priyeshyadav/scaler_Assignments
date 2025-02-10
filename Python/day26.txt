@@ -1,0 +1,52 @@
+Q1:
+A = int(input())
+B = int(input())
+C = int(input())
+if A+B+C == 180:
+    print(1)
+else:
+    print(0)
+
+Q2:
+C = int(input())
+S = int(input())
+if C > S:
+    print(-1)
+    print(C-S)
+else:
+    print(1)
+    print(S-C)
+
+Q3:
+A = int(input())
+B = int(input())
+if A>B :
+    print(A)
+else:
+    print(B)
+
+Q4:
+A & C
+
+if a>=2:
+      print("TRUE")
+
+if (a%2!=0):
+      print("TRUE")
+
+=> is not any operator in Python.
+a//3=1 is not correct comparision, It should be a//3 == 1.
+
+Q5:
+age = int(input())
+if age < 13:
+    print('You can\'t ride the roller coaster.')
+else:
+    print('You can ride the roller coaster!')
+
+/* There are 3 ways to print can't , inline 48 \ is called escaping charcater.
+print('You can\'t ride the roller coaster.')
+print("You can't ride the roller coaster.")
+print('''You can't ride the roller coaster.''')
+*/
+
