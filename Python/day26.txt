@@ -50,3 +50,52 @@ print("You can't ride the roller coaster.")
 print('''You can't ride the roller coaster.''')
 */
 
+AQ1:
+A1 = int(input())
+A2 = int(input())
+B1 = int(input())
+B2 = int(input())
+if (A1+A2)/2 > (B1+B2)/2 :
+    print('True')
+else:
+    print('False')
+
+AQ2:
+A = int(input())
+B = int(input())
+if A<B:
+    print(A)
+else:
+    print(B)
+
+AQ3:
+error
+Explanation : Else shoudl be immediately followed by else , x = 4 if written just after if which is causing the error.
+
+AQ4:
+For x > 2, output will be equal to 0
+
+AQ5:
+'Below Freezing'
+
+AQ6:
+# We used floor devision since we need lower interger after division.
+A = int(input())
+B = int(input())
+C = int(input())
+D = int(input())
+E = int(input())
+percentage = ((A+B+C+D+E)//5)
+print(percentage)
+if percentage >= 90 :
+    print('A')
+elif percentage >=80 and percentage < 90 :
+    print('B')
+elif percentage >=70 and  percentage < 80 :
+    print('C')
+elif percentage >=60 and percentage < 70 :
+    print('D')
+elif percentage >=40 and percentage < 60 :
+    print('E')
+else:
+    print('F')
