@@ -1,0 +1,71 @@
+Q1:
+def main():
+    T = int(input())
+    while T > 0 :
+        N = int(input())
+        reverse = 0
+        while N !=0:
+            reverse = reverse * 10 + N%10
+            N = N//10
+        print(reverse)
+        T -= 1
+
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+Q2:
+def main():
+    A = int(input())
+    N = A
+    reverse = 0
+    while N !=0:
+        reverse = reverse * 10 + N%10
+        N = N//10
+    if A == reverse:
+        print('Yes')
+    else:
+        print('No')   
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+Q3: It is the greatest integer divisor of both a and b
+
+Q4:
+def main():
+    T = int(input())
+    while T > 0 :
+        #HCF = 0
+        A = int(input())
+        B = int(input())
+        for i in range(min(A,B),0,-1):
+            if A%i == 0 and B%i == 0:
+                print(i)
+                break;
+        T -= 1
+
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+Q5:
+def main():
+    T = int(input())
+    while T > 0 :
+        #HCF = 0
+        A = int(input())
+        B = int(input())
+        for i in range(min(A,B),0,-1):
+            if A%i == 0 and B%i == 0:
+                print(int((A*B)/i))
+                break;
+        T -= 1
+
+    return 0
+
+if __name__ == '__main__':
+    main()
