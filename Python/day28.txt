@@ -69,3 +69,83 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+AQ1:
+a a c
+
+AQ2:
+def main():
+    N = int(input())
+    while N > 0:
+        for i in range(1,N+1):
+            if i == N:
+                print(i, end='')
+            else:
+                print(i, end=' ')
+        print()
+        N -= 1
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+AQ3:
+def main():
+    N = int(input())
+    for i in range(N+1):
+        for j in range(i+1):
+            print('*',end='')
+        print()    
+
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+
+AQ4:
+def main():
+    N = int(input())
+    for i in range(1,N+1):
+        for j in range(1,i+1):
+            if j == i:
+                print(j, end='')
+            else :
+                print(j,end=' ')
+        print() 
+
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+
+AQ5:
+def main():
+    N = int(input())
+    space = N
+    while N > 0 :
+        print("*",end='')
+        for i in range(space-2):
+            print(' ',end='')
+        print("*")
+        N -= 1
+
+
+
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+
+AQ6:
+N = int(input())
+M = int(input())
+while N > 0 :
+    J = M
+    while J > 0:
+        print('*',end="")
+        J -= 1
+    print()
+    N -= 1
