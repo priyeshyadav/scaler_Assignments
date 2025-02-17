@@ -1,0 +1,33 @@
+Q1:
+def celsius_farhen(Celsius):
+    ans = 0
+    ans = (9/5 * Celsius) +32  
+    return round(ans,2)
+
+Q2:
+def road_tax(price):
+    tax = None
+    tax_percentage = 0
+    if price <= 50000:
+        tax_percentage = 5
+    elif price > 50000 and price <= 75000:
+        tax_percentage = 10
+    elif price > 75000 and price <=100000:
+        tax_percentage = 15
+    else:
+        tax_percentage = 20
+    tax = round(float((price * tax_percentage)/100),1)
+    return tax
+
+Q3:
+def sum_squares(n):
+    ans = None
+    ans = (n*(n+1)*(2*n+1)/6)    
+    return int(ans)
+
+Q4:
+Interest(p=1000,c=5)
+Interest(c=4,r=0.12,p=5000)
+
+Q5:
+global,local,local
