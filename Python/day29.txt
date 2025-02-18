@@ -31,3 +31,75 @@ Interest(c=4,r=0.12,p=5000)
 
 Q5:
 global,local,local
+
+---------------------------------------
+AQ1:
+def sequence(n):
+    for i in range(1, n+1):
+        if i == n:
+            print(i, end='\n')
+        else:
+            print(i, end = ' ')
+    for j in range(n,0,-1):
+        if j == 1:
+            print(j, end='')
+        else:
+            print(j, end = ' ')
+
+
+AQ2:
+65 Reason : Value of x was increemnted by 10 befire the function was called.
+
+AQ3:
+def perfect_number(n):
+    sum = 0
+    for i in range(1,n+1):
+        if n%i == 0:
+            sum = sum + i
+    if sum/2 == n :
+        return 1
+    else:
+        return 0
+
+
+AQ4:
+def volume_sphere(r):
+    return round((4 * (22/7) * (r**3))/3,2)
+
+
+AQ5:
+def star(n):
+    for i in range(n,0,-1):
+        if i == n :
+            print('*'*n)
+        elif i < n and i > 1:
+            print('*',end='')
+            print(' '*(i-2),end='')
+            print('*')
+        else:
+            print('*', end='')
+        
+
+OR 
+
+def star(n):
+    # Loop from 1 to n
+    for i in range(1,n+1):
+        # Loop from i to n
+        for j in range(i,n+1):
+            if i==j or i==1 or j==n:
+                print('*',end='')
+            else:
+                print(' ',end='')
+        print()
+
+AQ6 :
+def isvowel(C):
+    ans = None
+    # YOUR CODE GOES HERE
+    if C == 'a' or C == 'e' or C == 'i' or C == 'o' or C == 'u':
+        ans = 1
+    else:
+        ans = 0    
+    
+    return ans
