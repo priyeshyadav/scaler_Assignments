@@ -1,0 +1,40 @@
+Q1:
+def even_odd(A):
+    diff = 0
+    for element in A:
+        if element%2 == 0:
+            diff = diff + element
+        else:
+            diff = diff - element    
+    return diff
+
+Q2:
+def calculate_sum(input_list):
+    sum = 0
+    for element in input_list:
+        sum = sum + element
+    print(sum)
+
+Q3:
+def duplicate(ls,n):
+    ans = False
+    for i in range(n-1):
+        if ls[i] == ls[i+1]:
+            ans = True
+            break
+    return ans
+
+Q4:
+def first_multiple(ls,x):
+    ans = -1
+    for element in ls:
+        if element % x == 0:
+            ans = element
+            break    
+    return ans
+
+Q5:
+if (ele % 2 != 0): res.append(ele)
+
+-------------------------------------------------------------------------
+
