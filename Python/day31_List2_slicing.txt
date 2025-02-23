@@ -5,9 +5,18 @@ Q2:
 extend, append, sort
 
 Q3:
+def solve(A,B):
+    ans = [0]*2
+    for x in A:
+        if x <= B:
+            ans[1] = x
+        if x >= B:
+            ans[0] = x
+            break
+    return ans
 
 Q4:
-// Took helo from companion to define C 
+// Took help from companion to define C 
 def addMatrices(A, B):
     C = [[0 for j in range(len(A[0]))] for i in range(len(A))]
     for i in range(len(A)):
@@ -43,6 +52,15 @@ def invert(A):
     return lst
 
 AQ4:
+def transpose(A):
+    rows, cols = len(A), len(A[0])
+    B = [[0] * rows for _ in range(cols)]  # took help from companion
+    
+    for i in range(rows):
+        for j in range(cols):
+            B[j][i] = A[i][j]  
+    
+    return B
 
 AQ5:
 def invert(A):
