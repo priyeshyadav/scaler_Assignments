@@ -36,3 +36,26 @@ class Solution:
                 lst[1] += 1
         return lst
 
+-----------------------------------------------------
+AQ1:
+fox quick word own fox word! ord!
+
+AQ2:
+a-ii, b-ii, c-i, d-ii
+
+AQ3:
+s[2] = 'a'
+print(s[9])
+
+AQ4:
+HelloHello
+
+AQ5:
+All correct
+
+AQ6:
+def isPalindrome(s):
+    if s == s[::-1]:
+        return True
+    else:
+        return False
