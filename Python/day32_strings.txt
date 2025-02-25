@@ -1,0 +1,38 @@
+Q1:
+def date_format(date):
+    lst = date.split('/')
+    return lst[1]+'/'+lst[0]+'/'+lst[2] , lst[2]+'/'+lst[1]+'/'+lst[0]
+
+Q2:
+class Solution:
+    def solve(self, A, B, C):
+        lst = []
+        for elemnet in A:
+            if ord(elemnet) == B:
+                elemnet = chr(C)
+            lst.append(elemnet)
+        return ''.join(lst)
+
+Q3:
+sCaLeR AcAdEmY
+
+Q4:
+class Solution:
+    # @param A : string
+    # @return a strings
+    def solve(self, A):
+        return A[::-1]
+
+Q5:
+class Solution:
+    # @param A : string
+    # @return a list of integers
+    def solve(self, A):
+        lst = [0]*2
+        for element in A:
+            if element in ('a','e','i','o','u'):
+                lst[0] += 1
+            else:
+                lst[1] += 1
+        return lst
+
