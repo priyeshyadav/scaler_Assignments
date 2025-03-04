@@ -1,0 +1,50 @@
+Q1:
+def odd_even_split_tuple(tup):
+     odd, even = [], []
+     for i in range(len(tup)):
+          if i%2 != 0:
+               even.append(tup[i])
+          else:
+               odd.append(tup[i])
+     print(f"Odd: {tuple(odd)}")
+     print(f"Even: {tuple(even)}")
+
+Q2:
+(“Item_1”, 0.5, [“Vijay”, “Vickey”, “Vishal”])
+
+Q3:
+A-ii, B-i, C-ii
+
+Q4:
+def set_operation(sent1,sent2):
+    return  len(set(sent1.split()))+len(set(sent2.split()))
+
+Q5:
+Error
+
+-----------------------------------------
+AQ1:
+s = set(['Scaler', 'Academy', 'is', 'Awesome'])
+s = {'Scaler', 'Academy', 'is', 'Awesome'}
+
+AQ2:
+sets.update([1, 2, 3])
+sets.union({1, 2, 3})
+
+AQ3:
+Type Error
+
+AQ4:
+def unique_count(tup):
+    unique_element = []
+    for element in tup:
+        if element not in unique_element:
+            unique_element.append(element)
+            print(element,':',tup.count(element))
+
+AQ5:
+(30, 40, 50) (10, 20, 30, 40) (40, 50, 60, 70, 80)
+
+AQ6:
+def symm_diff(set1, set2 ):
+    return set1.symmetric_difference(set2)

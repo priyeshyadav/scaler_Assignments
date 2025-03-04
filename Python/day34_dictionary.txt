@@ -1,0 +1,56 @@
+Q1:
+def dict_freq(str1):
+    '''str1 is a string
+       Ouput -> A dictionary is expected to be returned'''
+    freq_dict = {}  # Initialize an empty dictionary
+    
+    # Iterate over each character in the string
+    for char in str1:
+        if char in freq_dict:
+            freq_dict[char] += 1  # Increment count if character already exists in the dictionary
+        else:
+            freq_dict[char] = 1  # Initialize count to 1 if character is not in the dictionary
+    
+    return freq_dict
+
+Q2:
+def returnSum(dict):
+    print(sum(dict.values()))
+
+Q3:
+{“Sheldon”: 1, “Leonard”: 2, “Penny”: 2}
+
+Q4:
+freshers[‘student3’][‘salary’] = 8500
+
+Q5:
+This is not a member of the dictionary
+----------------------------------------------------
+AQ1:
+1. True 2. False
+
+AQ2:
+{1: 2, ‘1’: 2}
+
+AQ3:
+def list_to_dict(keys, values):
+    d = {}
+    length = min(len(keys), len(values))
+    for i in range(length):
+        d[keys[i]] = values[i]
+    return d
+
+AQ4:
+del prices['banana']
+
+AQ5:
+def count_char(string):
+    if len(string) == 0:
+        return None
+    else:
+        char, count = '',1
+        for character in string:
+            if string.count(character) <= count:
+                char = character
+                count = string.count(character)
+        return char
