@@ -1,0 +1,50 @@
+Q1:
+def mostFrequent(s):
+    words = s.split()
+    word = ''
+    count = 0
+    for w in words:
+        if s.count(w) > count:
+            count = s.count(w)
+            word = w
+    return word
+
+Q2:
+def removeAll(arr, val):
+    for element in arr:
+        if element == val:
+            arr.remove(element)
+    
+    return arr
+
+
+Q3:
+def divides(A, B):
+    count = 0
+    for element in A:
+        if B % element == 0:
+            count += 1
+    
+    return count
+
+Q4:
+def findIntersection(all_arrays):
+    s = set(all_arrays[0])
+    for i in range(1,len(all_arrays)):
+        s.intersection_update(all_arrays[i])
+    return s
+
+Q5:
+def common(arr1, arr2):    
+    return set(arr1).intersection(set(arr2))
+
+Q6:
+def merge(A, B):
+    my_dict = {}
+    s = set(A.keys()).union(set(B.keys()))
+    for element in s:
+        if A.get(element,-10**5) > B.get(element,-10**5):
+            my_dict[element] = A[element]
+        else:
+            my_dict[element] = B[element]
+    return my_dict
