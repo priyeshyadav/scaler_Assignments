@@ -1,0 +1,96 @@
+Q1:
+for i in range(n):
+  j=i
+  while j<i:
+    print(j)
+    j=j+1
+
+Ans : O(n)
+
+Q2:
+for i in range(1, n+1):
+    for j in range(1, n+1):
+        for k in range(n//2, n+1, n//2):
+            c += 1
+
+Ans : O(n^2)
+
+Q3:
+def isprime(n):
+  for i in range(2, int(n**0.5)+1):
+    if n%i==0:
+      return False
+  return True
+
+Ans: O(n**0.5)
+
+Q4:
+for i in range(1, n):
+    for j in range(1, n//4):
+        for k in range(1, n):
+            break
+
+Ans : O(n^2)
+
+Q5:
+def function(arr):
+    n = len(arr)
+    hash = [[0 for _ in range(n)] for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            hash[i][j] = arr[i]*2
+    return sum([sum(i) for i in hash])
+
+function([1,2,3,4,5])
+
+Ans : O(n^2)
+
+Q6:
+for i in range(n):
+  j=i
+  while j!=0:
+    print(j)
+    j=j//2
+
+Ans : O(nlog(n))
+---------------------------------------------------------------------------------------------------
+
+Explanations : 
+Q1:
+1) loop for i run n times -> O(n)
+2) while loop will never run as j<i will never become true as at each step j = i
+3) Hence Overall Time Complexity is O(n)
+
+Q2:
+1) First loop will run n times
+2) Second loop will run n times for each iteration of first loop.
+3) Third loop will only run 2 times for each iteration of outer loops.
+4) For each iteration of i, lower loops will run n*2 times.
+5) Now such n outer loop will run, Hence it will be n*n*2
+6) We can ignore constants, hence overall Time Complexity will be O(n^2)
+
+Q3:
+1) Only one loop which is ruuning N**0.5 times
+2) Hence overall Time Complexity is O(n**0.5)
+
+
+Q4:
+1) Outer i loop will run n times.
+2) inner j loop with N/4 times for each iteration of i
+3) innrer k loop with run only once and break immediately 
+4) Since they are inside each other, complexity would be n * (n/4) * 1
+4) We can ignore constants, Hence overall Time Complexity will be O(n^2)
+
+Q5:
+1) Hash matrix created with 2 nested for loops, n^2
+2) Assigment of items is again done with 2 nested loops, n^2
+3) matrix size is n*n, hence for sum, we need to traverse n rows & n colums.
+4) Since all these operation are sequencial , we can add them  n^2 + n^2 + n^2
+5) We can ignore constants, Hence overall Time Complexity will be O(n^2)
+
+Q6:
+1) for loop will run n times.
+2) while loop will follow a sequence of n, n/2, n/4 ......1
+3) for each iteration of i, there will be log(n) iteration.
+3) n such outer loops will run , hence adding all iteration log(n) + log(n)..... log(n) for n times
+4)  Hence overall Time Complexity will be O(nlog(n))
