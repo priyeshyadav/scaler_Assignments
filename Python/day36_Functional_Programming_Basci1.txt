@@ -1,0 +1,63 @@
+Q1:
+list( filter( lambda x: (x =="".join( reversed(x))), arr))
+
+Q2:
+0 2 4 6 8
+
+Q3:
+(1,4)
+
+Q4:
+def LengthSequence(string, length):
+    '''string => a string
+       length => an integer representing required length of words which are be returned'''
+    result= []
+    for word in string.split():
+        if len(word) == length:
+            result.append(word)
+    
+
+    return result
+
+Q5:
+def filter_and_sort_numbers(numbers_string):
+    """
+    This function takes a string of numbers separated by spaces, 
+    converts them to integers, filters out negative numbers, 
+    and returns the sorted list of remaining numbers.
+    """
+    # 1. Split the string into a list of numeric strings
+    lst = numbers_string.split()
+    
+    # 2. Convert each string to an integer
+    num_lst = []
+    for number in lst:
+        num_lst.append(int(number))
+    lst.clear()
+
+    
+        
+    # 3. Filter out negative numbers
+    for number in num_lst:
+        if number >=0:
+            lst.append(number)
+    
+    
+    # 4. Sort the numbers in ascending order
+    lst.sort()
+    
+    # 5. Return the final list
+    return lst
+
+    OR
+
+    def filter_and_sort_numbers(numbers_string):
+        num_lst = [int(num) for num in numbers_string.split()]
+        filtered_lst = [num for num in num_lst if num >= 0]
+        filtered_lst.sort()
+        return filtered_lst
+
+    OR
+
+    def filter_and_sort_numbers(numbers_string):
+        return sorted([int(num) for num in numbers_string.split() if int(num) >= 0])
