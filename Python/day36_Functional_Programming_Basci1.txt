@@ -61,3 +61,42 @@ def filter_and_sort_numbers(numbers_string):
 
     def filter_and_sort_numbers(numbers_string):
         return sorted([int(num) for num in numbers_string.split() if int(num) >= 0])
+
+--------------------Additional Question-------------------------------
+AQ1:
+17
+
+AQ2:
+def function(n):
+    def generate():
+        fib_sequence = []
+        a, b = 0, 1
+        for _ in range(n):
+            fib_sequence.append(a)
+            a, b = b, a + b
+        return fib_sequence
+    return generate
+
+AQ3:
+def decorate(function):
+    def wrapper(students_data):
+        for student in students_data:
+            name = student["name"]
+            scores = student["scores"]
+            avg_marks = round(sum(scores.values()) / len(scores), 2)
+            print(f"{name}: {avg_marks}")
+
+        return round(function(students_data), 2)  # Calling the original function and rounding the result
+    return wrapper
+
+
+@decorate
+def return_mean_grace(students):
+    total_grace = sum(student["grace_marks"] for student in students)
+    return total_grace / len(students)
+
+AQ4:
+30
+
+AQ5:
+['PYTHON', 'LEARN']
