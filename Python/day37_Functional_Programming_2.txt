@@ -1,0 +1,63 @@
+Q1:column_names, row
+Q2:palindromes = list(filter(lambda word: word == word[::-1], my_list))
+Q3:[(1, 4, 7, 9, 6, 3), (2, 5, 8, 8, 5, 2), (3, 6, 9, 7, 4, 1)]
+Q4:
+from functools import reduce 
+def func(integers, names, numbers):
+    '''
+    input:
+    integers -> list of integers to perform the square operation on
+    names -> list of names to filter out as per the condition
+    numbers -> list of numbers whose product we want
+    
+    output:
+    map_result -> output of integers list
+    filter_result -> output of the names lsit
+    reduce_result -> output of the numbers list
+    '''
+    map_result, filter_result, reduce_result = None, None, None
+    map_result = list(map(lambda num: num**2, integers))
+    filter_result = list(filter(lambda name: len(name) <=7, names))
+    reduce_result = reduce(lambda x,y: x*y , numbers)
+
+    
+  
+    
+    return map_result, filter_result, reduce_result
+
+Q5:
+def email_validaity(email):
+    if email.count('@') != 1:
+        return False
+    email_parts = tuple(email.split('@'))
+    if len(email_parts) != 2:
+        return False
+    if len(email_parts[0]) > 20 or len(email_parts[0]) == 0:
+        return False
+    if len(email_parts[1]) <= 4:
+        return False
+    return True
+    
+    
+
+
+def check(emails):
+    '''
+    input:
+    emails -> list of emails to check
+    
+    output:
+    verified_lex -> the verified list of emails, in lexicographical order
+    '''
+    
+    verified_lex = None
+    verified_lex = sorted(list(filter(email_validaity, emails)))
+    
+    return verified_lex
+----------Additional Question--------------
+Q1:
+Q2:
+Q3:
+Q4:
+Q5:
+Q6:
