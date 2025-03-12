@@ -56,8 +56,65 @@ def check(emails):
     return verified_lex
 ----------Additional Question--------------
 Q1:
+from functools import reduce
+
+def process_sensor_readings(N, sensor_lines):
+    """
+    N: Number of lines to process
+    sensor_lines: List of strings, where each string contains space-separated sensor readings
+                  (some of which may be invalid, e.g., 'None', 'abc', etc.).
+    
+    Returns: A list of integer sums, one for each line of valid readings.
+    """
+    
+    result_sums = []
+    line=[]
+    
+    for i in range(N):
+        # Split the current line into tokens
+        line = sensor_lines[i].split()
+        
+        # 1. Filter out invalid entries (keep only numeric tokens)
+        line = list(filter(lambda x: x.isdigit() , line))
+        
+        # 2. Map valid tokens to integers
+        line = list(map(lambda x : int(x) , line))
+        
+        # 3. Reduce integers to their sum, starting from 0 for an empty list
+        total = reduce(lambda x,y : x+y , line,0)
+        # 3rd argument to Reduce is starting value, we are using 0 to avoid empty string exception.
+        # We will get 0 from reduce if string is empty and its appended to results_sum 
+
+        result_sums.append(total)
+        
+          
+    return result_sums
+
 Q2:
+flexible_function(1, 2, 3, a=4, b=5)
+
 Q3:
+list(filter(lambda x: x % 2 == 1, numbers))
+
 Q4:
+def sort_strings(str_list):
+            #str_list-> list of strings
+            # return the sorted list of strings on the basis of criteria mentioned
+            # code starts here
+	res = []
+	res = sorted(str_list, key=lambda x:(len(x),x))
+            # In lambda return (len(x),x) actually represnts a tuple.
+            # if you dont make it a tuple, we will get error and we wont be able to handle both filter conditions.
+            # sorting will happen based on first tuple element & then based on second tuple element.
+	return res
+
 Q5:
+name in x.lower()
+
 Q6:
+from functools import reduce
+
+def calc(*args):
+    summation = reduce(lambda x,y : x+y , args)
+    product = reduce(lambda x,y : x*y , args) 
+    return (summation,product)
