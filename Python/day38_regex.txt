@@ -1,0 +1,43 @@
+Q1:
+re.match("hello", string)
+
+Q2:
+\b[A-B]\w+\b
+
+Q3:
+\d+
+
+---------------Additional Questions------------------
+AQ1:
+import re
+
+def validate_emails(emails):
+
+    valid_emails = []
+    pattern = r'^[\w\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z]{2,}$'
+    for email in emails:
+        if re.match(pattern, email):
+            valid_emails.append(email)
+    return valid_emails
+
+AQ2:
+^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+[\]{}|;:'",.<>?/]).{8,}$
+
+Explanation:
+
+^: Asserts the start of the string.
+(?=.*[a-z]): Positive lookahead for at least one lowercase letter.
+(?=.*[A-Z]): Positive lookahead for at least one uppercase letter.
+(?=.*\d): Positive lookahead for at least one digit.
+(?=.*[!@#$%^&*()-_=+\[\]{}|;:'",.<>?/]): Positive lookahead for at least one special character from the specified set.
+.{8,}: Matches any character (except for a newline) at least 8 times.
+$: Asserts the end of the string.
+
+AQ3:
+[‘7’, ‘4’]
+
+Explanation
+
+(\d+): This is a capturing group that matches one or more digits.
+\s: This matches a whitespace character (space).
+(?:apples|mangoes): This is a non-capturing group that matches either ‘apples’ or ‘mangoes’.
