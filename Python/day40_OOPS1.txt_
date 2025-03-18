@@ -94,5 +94,47 @@ class Student():
     
         return round(gpa,2)
 
+or
+
+class Student():
+    
+    def __init__(self, marks1,marks2,credits1, credits2):
+        #YOUR CODE GOES HERE
+        self.marks1 = marks1
+        self.marks2 = marks2
+        self.credits1 = credits1
+        self.credits2 = credits2
+    
+    def marks_to_points(self,marks):
+        point = 0
+        #self.marks = marks
+        if marks >=90:
+            point = 10
+        elif marks < 90 and marks >= 75:
+            point = 9
+        elif marks < 75 and marks >= 60:
+            point = 8
+        elif marks < 60 and marks >= 45:
+            point = 7
+        else:
+            point = 0
+        return point
+
+       
+    def grade_point_average(self):
+        gpa=0
+        
+        #YOUR CODE GOES HERE
+        points1 = self.marks_to_points(self.marks1)
+        points2 = self.marks_to_points(self.marks2)
+
+        if self.credits1 ==0 and self.credits2 ==0:
+            gpa = -1.0
+        else:
+            gpa = ((points1 * self.credits1)+(points2*self.credits2))/(self.credits1 + self.credits2)
+
+    
+        return round(gpa,2)
+
 Q6:
 All of these
