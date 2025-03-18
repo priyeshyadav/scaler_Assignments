@@ -1,0 +1,98 @@
+Q1:
+A & C 
+def __init__(self):
+  super().__init__()
+def type(self):
+  self.print()
+
+def __init__(self):
+  super().__init__()
+def type(self):
+  super().print()
+
+Explanation : 
+Class child is inheritted from Class Parent. Class Child has access to all method & attribute of classs Parent.
+self.print() - Access Parent class.
+super().print() - Also access the Parent class.
+
+Q2:
+B 
+Explanation : Class B is subclass of A & is over writting  method two() in parent.
+
+Q3:
+pizza = Circle(12)
+print(pizza.circumference())
+
+Q4:
+class Bill():
+
+    def __init__(self, prev_read, cur_read):
+        #YOUR CODE GOESS HERE
+        self.prev_read = prev_read
+        self.cur_read = cur_read
+        
+        
+        
+    def total_bill(self):
+        total=150.0
+        #YOUR CODE GOESS HERE
+        self.unit_consumed = self.cur_read - self.prev_read
+        if self.unit_consumed >= 100 :
+            total = total + (100*3.5)
+            self.unit_consumed -= 100
+        else :
+            total = total + (self.unit_consumed * 3.5)
+            return total
+        if self.unit_consumed >=100 :
+            total = total + (100 * 5)            
+            self.unit_consumed -= 100
+        else:
+            total = total + (self.unit_consumed*5)
+            return total
+        if self.unit_consumed > 0:
+            total = total + (self.unit_consumed * 8)
+            return total
+
+Q5:
+class Student():
+    
+    def __init__(self, marks1,marks2,credits1, credits2):
+        #YOUR CODE GOES HERE
+        self.marks1 = marks1
+        self.marks2 = marks2
+        self.credits1 = credits1
+        self.credits2 = credits2
+    
+    def marks_to_points(self,marks):
+        point = 0
+        self.marks = marks
+        if self.marks >=90:
+            point = 10
+        elif self.marks < 90 and self.marks >= 75:
+            point = 9
+        elif self.marks < 75 and self.marks >= 60:
+            point = 8
+        elif self.marks < 60 and self.marks >= 45:
+            point = 7
+        else:
+            point = 0
+        return point
+
+       
+    def grade_point_average(self):
+        gpa=0
+        
+        #YOUR CODE GOES HERE
+        self.points1 = self.marks_to_points(self.marks1)
+        self.points2 = self.marks_to_points(self.marks2)
+
+        if self.credits1 ==0 and self.credits2 ==0:
+            gpa = -1.0
+        else:
+            gpa = ((self.points1 * self.credits1)+(self.points2*self.credits2))/(self.credits1 + self.credits2)
+
+    
+        return round(gpa,2)
+
+Q6:
+All of these
