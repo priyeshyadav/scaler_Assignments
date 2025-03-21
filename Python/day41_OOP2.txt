@@ -1,0 +1,118 @@
+Q1: 
+1 2
+
+Q2:
+100
+
+Q3:
+Rectangle(3, 4)
+
+Q4:
+15
+left object is given priority.
+
+Q5:
+p1 object
+
+Q6:
+def timeHandle(a,b,c,d):
+    '''inputs: a,b = hours and mins of t1
+               c,d = hours and mins of t2
+        Output: Two lines of output for each pair of t1 and t2. The code for printing outputs is already just make sure to return in the methods.'''
+    # The code for taking input and printing output is already taken care of.
+
+    class Spanoftime:
+        def __init__(self,h,m):
+            self.hours=h
+            self.mins=m
+            
+        def displayTime(self):
+            return ("{} hours and {} min".format(self.hours,self.mins))
+        
+        def addTime(t1,t2):
+            t3=Spanoftime(0,0)
+            # Complete the function
+            if t1.mins + t2.mins >= 60:
+                hours = t1.hours + t2.hours + (t1.mins+t2.mins)//60
+                mins = (t1.mins+t2.mins)%60
+                t3 = Spanoftime(hours, mins)
+            else:
+                t3 = Spanoftime((t1.hours + t2.hours), (t1.mins + t2.mins))
+            return t3
+            
+        def returnMinutes(t1,t2):
+            # Return the total number of minutes
+            return ((t1.hours+t2.hours)*60) + (t1.mins+t2.mins)
+        
+    t1=Spanoftime(a,b)
+    t2=Spanoftime(c,d)
+    t3=Spanoftime.addTime(t1,t2)
+    t3.displayTime()
+    totalmin=str(Spanoftime.returnMinutes(t1,t2))
+    return t3.displayTime(),("The total minutes in time t1 and t2 are: " + totalmin)
+
+
+Q7:
+
+    
+class Smaller:
+    def __init__(self,a):
+        self.string=a
+    
+    def display(self):
+        print("The type of Name is Smaller")
+    
+    def evaluate(self):
+        ans=0
+        for character in self.string:
+            if character.lower() in ['a','e','i','o','u']:
+                ans += 1
+        
+        # YOUR CODE GOES HERE
+        print(ans)
+        
+class Larger:
+    def __init__(self,a):
+        self.string=a
+    
+    def display(self):
+        print("The type of Name is Larger")
+    
+    def evaluate(self):
+        ans=0
+        for character in self.string:
+            if character.lower() not in ['a','e','i','o','u']:
+                ans += 1
+        
+        # YOUR CODE GOES HERE
+        print(ans)
+
+def main(a):
+    '''
+    input a is string
+    '''
+    if len(a)<6:
+        obj=Smaller(a)
+        obj.display()
+        obj.evaluate()
+    else:
+        obj=Larger(a)
+        obj.display()
+        obj.evaluate()
+    
+
+-----Additional Ques-----
+Q1:
+The file test.txt is written with “Hello, World!” and is properly closed despite the raised exception.
+
+Q2:
+30
+
+Q3:
+A.init(self)
+
+Q4:
+
+Q5:
+John
+
