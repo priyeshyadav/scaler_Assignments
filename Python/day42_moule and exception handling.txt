@@ -1,0 +1,49 @@
+Q1:
+import numpy as np
+def calc(a,b,c):
+  """
+  a is list, b is string, c is integer
+  return the exception in msg 
+  """
+  try:
+    #YOUR CODE GOES HERE
+    if len(a) == 0:
+      raise Exception("Null value passed")
+    elif b == 'Quantile':
+      return np.quantile(a,c)
+    elif b == 'Percentile':
+      return np.percentile(a,c)
+    elif b not in ['Quantile','Percentile']:
+      raise Exception("Formula Error: Wrong Formula")
+    
+    
+    
+  except Exception as e:
+    #YOUR CODE GOES HERE
+    return e
+
+Q2:
+Yes, because except should be used before finally
+
+Q3:
+FileNotFoundError
+
+Q4:
+1
+
+Q5:
+A will print “integer”, B will print “integer”
+explanation : finally block is always executed and its return will override previous return statements.
+
+-----Additional Questions------
+AQ1:
+Print a series of unique random numbers in the range [0,99].
+
+AQ2:
+1/(math.factorial(i))
+
+AQ3:
+P-B, Q-C, R-A
+
+AQ4:
+Class
