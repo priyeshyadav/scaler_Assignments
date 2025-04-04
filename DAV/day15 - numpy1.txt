@@ -1,0 +1,69 @@
+Q1:
+For question 'a', the answer is np.arange(22,71,2)
+For question 'b', the answer is np.arange(21,72,2)
+
+Q2:
+arr.astype('float64')
+
+Q3:
+[2, 3, 4]
+
+Q4:
+Given code will change the sign of all the numbers in range [-5, 15] in x.
+
+Q5:
+import numpy as np
+def get_array_properties(arr):    '''
+    INPUT: arr -> A nD array    
+    OUTPUT: result -> tuple consisting of shape and dimension
+    '''    
+    ## STEP 1. Get the shape of array    
+    shape = arr.shape    
+    ## STEP 2. Get the dimension of array    
+    dim = arr.ndim  
+    
+    return shape,dim
+
+Q6:
+import numpy as np
+def get_elements(arr):    '''
+    INPUT: arr -> 1D numpy array    
+    OUTPUT elements -> tuple of first and last element.
+    '''    
+    first_element = arr[0]    
+    last_element = arr[-1]    
+    return (first_element, last_element)
+
+Q7:
+import numpy as np
+def seq(start, length, step):
+    ''' start, length and step are in form of integers all representing the attributes as their names suggest
+        output -> A numpy array is expected to be returned'''
+
+    # YOUR CODE GOES HERE    
+    sequence = np.arange(start, start + (length*step), step)    
+    return sequence
+
+Q8:
+import numpy as np
+def create_seq(start, end, step):    
+    '''
+    INPUT: start, end, step     
+    OUTPUT: arr -> 1D numpy array    
+    '''    
+    arr = np.arange(start,end,step).round(2)    
+    return arr
+
+OR
+
+import numpy as np
+def create_seq(start, end, step):
+    '''
+    INPUT: start, end, step 
+    OUTPUT: arr -> 1D numpy array
+    '''
+    arr = np.round(np.arange(start, end, step),2)
+    return arr
+
+
+------Additional Que--------
