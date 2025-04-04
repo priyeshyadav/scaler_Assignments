@@ -10,7 +10,7 @@
             <tr>
                 <td>3</td>
                 <td>Data Analysis & Visulization</td>
-                <td>https://github.com/priyeshyadav/scaler_Assignments/tree/main/DAV</td>
+                <td><a href="https://github.com/priyeshyadav/scaler_Assignments/tree/main/DAV" target="_blank">DAV Assignments</a></td>
             </tr>
             <tr>
                 <td>2</td>
