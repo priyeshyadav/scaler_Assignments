@@ -8,6 +8,11 @@
                 <th>Link</th>
             </tr>
             <tr>
+                <td>3</td>
+                <td>Data Analysis & Visulization</td>
+                <td>https://github.com/priyeshyadav/scaler_Assignments/tree/main/DAV</td>
+            </tr>
+            <tr>
                 <td>2</td>
                 <td>Python</td>
                 <td><a href="https://github.com/priyeshyadav/scaler_Assignments/tree/main/Python" target="_blank">Python Assignments</a></td>
