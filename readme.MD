@@ -8,9 +8,9 @@
                 <th>Link</th>
             </tr>
             <tr>
-                <th>3</th>
-                <th>Data Analysis & Visulization</th>
-                <th>https://github.com/priyeshyadav/scaler_Assignments/tree/main/DAV</th>
+                <td>3</td>
+                <td>Data Analysis & Visulization</td>
+                <td>https://github.com/priyeshyadav/scaler_Assignments/tree/main/DAV</td>
             </tr>
             <tr>
                 <td>2</td>
