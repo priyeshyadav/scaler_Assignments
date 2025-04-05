@@ -67,3 +67,21 @@ def create_seq(start, end, step):
 
 
 ------Additional Que--------
+Q1: 6
+Q2: [False, True, False, True]
+Q3: arr[0,2,4,6]
+Q4: [10 2 20 4 30 6 40 8]
+Q5:
+import numpy as np
+def ratio(marks_arr):
+    # Complete the missing code
+    distinction = marks_arr[marks_arr >= 80] # Use masking to get the values
+    first_div = marks_arr[ (marks_arr >= 60) & (marks_arr < 80)] # Use masking to get the values
+    # Use & instead of AND , saperate both condition with paranthesis
+    
+    distinction_count = len(distinction)
+    first_div_count = len(first_div)
+    
+    ratio = distinction_count/first_div_count
+    
+    return round(ratio,2)
