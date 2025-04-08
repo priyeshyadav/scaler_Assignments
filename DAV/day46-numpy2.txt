@@ -16,3 +16,51 @@ def filter_marks(marks):
     return filtered_array
 
 Q4:56
+
+------Additional Que--------
+Q1 :
+import numpy as np
+def check_conditions(arr, k):
+    '''
+    INPUT: arr, k
+    
+    OUTPUT: result -> bool
+    '''
+    
+    result = None    
+    ## STEP 1 : Create mask for the given condition    
+    mask = np.all(arr % 2 == 0) & np.all(arr > k)     
+    ## STEP 2: Use logical function on mask    
+    result = mask    
+    return result
+
+Q2:
+
+
+Q3:
+[[ 6 8 7 28 56 19]]
+
+Q4:
+import numpy as np
+def reverse_column(arr):
+    '''
+    INPUT: arr -> 2D array 
+    
+    OUTPUT rev_arr -> 2D array
+    '''    
+    rev_arr = arr[:,::-1]    
+    return rev_arr
+
+Q5:
+import numpy as np
+def rotate_img(mat):
+    '''mat -> A 2d numpy array
+       output -> A 2d numpy array is expected to be returned'''    
+    # Step 1: Transpose the matrix
+    transposed = mat.T    
+    # Step 2: Reverse each row (i.e., reverse along columns)
+    rotated = transposed[:, ::-1]    
+    return rotated
+
+
+Q6:
