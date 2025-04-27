@@ -1,0 +1,60 @@
+Q1:
+df.head(20) & df.iloc[0:20]
+
+Q2:
+.unique() method returns unique values in Series.
+.nunique() returns count of unique elements in Series
+.nunique(), when applied on dataframe will return the number of unique elements for each column.
+
+Q3:
+data.iloc[1:5, 3:5]
+
+
+--------------Additional Question--------------------
+AQ1:
+import pandas as pd
+def select_rows(df, r1, r2):
+    '''
+    input:
+    df -> the dataframe provided to the function
+    r1 -> the starting index of the rows to be selected
+    r2 -> the ending index of the rows to be selected
+    
+    output:
+    df_new -> the selected rows of the dataframe
+    '''
+    
+    # Select the rows r1 to r2
+    df_selected = df[r1:r2]
+    
+    # Select the columns "name" and "amt"
+    df_new = df_selected[['name','amt']]
+    
+    return df_new
+
+AQ2:
+data.loc[:,'disp']
+data['disp']` 
+
+AQ3:
+import pandas as pd
+def filtered_customers(df):
+    ''' df is a dataframe with columns ['name', 'profession', 'gender', 'age', 'review', 'rating']
+        Output -> A dataframe with required rows is expected to be returned'''
+
+    # YOUR CODE GOES HERE
+    # Filter the dataframe having ratings>=6 and choose the required columns
+    new_df = df[df['rating'] >= 6][['profession', 'gender', 'age']]
+    
+    return new_df
+
+or 
+
+import pandas as pd
+def filtered_customers(df):
+    new_df = df.loc[df.rating >= 6, ['profession', 'gender', 'age']]
+    return new_df
+
+AQ4:
+b) df = pd.DataFrame([[1, "Ram", "IT"], [2, "Shyam", "Ops"]], columns = ["emp_id", "name", "dept"])
+d) df = pd.DataFrame({'emp_id':[1, 2], 'name': ['Ram', 'Shyam'], 'dept':['IT', 'Ops']})

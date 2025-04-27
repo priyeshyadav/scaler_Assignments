@@ -34,7 +34,42 @@ def check_conditions(arr, k):
     result = mask    
     return result
 
+or
+
+import numpy as np
+
+def check_conditions(arr, k):
+    '''
+    INPUT: arr, k
+    
+    OUTPUT: result -> bool
+    '''
+    
+    result = None    
+    ## STEP 1 : Create mask for the given condition    
+    mask = (arr % 2 == 0) & (arr > k)     
+    ## STEP 2: Use logical function on mask    
+    result = np.all(mask)    
+    return result
+
 Q2:
+import numpy as np
+
+def extract_subarray(arr):
+    '''
+    INPUT: arr -> 2D array
+    OUTPUT: result -> 2D array
+    '''
+    arr = np.array(arr)  # Convert to numpy array if it's a list
+    # STEP 1: Get rows from index 1 to 3 (2nd to 4th row)
+    row_array = arr[1:4]
+    # STEP 2: Get the last 3 columns
+    cols_array = row_array[:, -3:]
+    # STEP 3: Reverse the rows
+    result = cols_array[::-1,;]
+
+    return result
+
 
 
 Q3:
@@ -64,3 +99,5 @@ def rotate_img(mat):
 
 
 Q6:
+For 'a', the answer is 1.0
+For 'b', the answer is 21
