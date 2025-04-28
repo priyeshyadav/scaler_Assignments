@@ -1,0 +1,58 @@
+Q1:
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+
+typ = eval(input())
+src = eval(input())
+df = pd.DataFrame({'Product Type': typ, 'Source': src})
+
+# Your code below
+# plot the countplot in cp
+cp = sns.countplot(data=df, x='Source')
+plt.xlabel("Source")
+plt.ylabel("count")
+plt.show()
+
+
+Q2:
+import numpy as np
+import matplotlib.pyplot as plt
+
+protein = eval(input())
+
+fig = plt.figure()
+
+unique_proteins, counts = np.unique(protein, return_counts=True)
+
+#Create the bar plot
+bars = plt.bar(x= unique_proteins, height= counts, color='g')
+
+#Add the xlabel
+plt.xlabel("Protein amount in grams")
+
+#Add the ylabel
+plt.ylabel("Number of cereals")
+
+#Add the title
+plt.title("Protein comparison")
+
+
+
+Q3:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sid = eval(input())
+sp = eval(input())
+year = eval(input())
+df = pd.DataFrame({'Sale ID': sid, 'Selling Price': sp, 'Year':year})
+
+# Plot the kdeplot after "kde = "
+kde = sns.kdeplot(data=df,x='Year', color='red')
+plt.show()
+
+Q4:
+Customers in first 4 additional services are more unlikely to churn
