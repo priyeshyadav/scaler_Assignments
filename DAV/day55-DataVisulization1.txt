@@ -56,3 +56,35 @@ plt.show()
 
 Q4:
 Customers in first 4 additional services are more unlikely to churn
+
+----------Addition Question-----------
+Q1:
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+
+categories = eval(input())
+sources = eval(input())
+df = pd.DataFrame({'Category': categories, 'Marketing Source': sources})
+
+# Your code below
+# plot the countplot in cp
+cp = sns.countplot(data=df, x='Marketing Source')
+plt.xlabel('Source')
+plt.ylabel('count')
+plt.show()
+
+or 
+
+import seaborn as sns
+import pandas as pd
+
+categories = eval(input())
+sources = eval(input())
+df = pd.DataFrame({'Category': categories, 'Marketing Source': sources})
+
+# Your code below
+# plot the countplot in cp with parameters x='Source' and data = df
+cp = sns.countplot(data=df, x='Marketing Source')
+cp.set_xlabel("Source")
+cp.set_ylabel("count")
