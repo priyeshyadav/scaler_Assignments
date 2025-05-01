@@ -1,0 +1,104 @@
+Q1:
+All the elements except those at the border are equated to zero.
+
+Q2:
+a, b, c
+
+Q3:
+import numpy as np
+
+def specific_elements(mat1, mat2, r1, r2, c1, c2):
+    '''mat1, mat2 are the two 2D numpy arrays.
+       r1, r2 are the start and end of row indices.
+       c1, c2 are the start and end of column indices.
+       Returns a sliced numpy array or -1 if multiplication isn't possible.'''
+    
+    # STEP 1: Check whether matrix multiplication is possible
+    if mat1.shape[1] != mat2.shape[0]:
+        return -1
+    
+    # STEP 2: Perform matrix multiplication
+    matmul_array = np.dot(mat1, mat2)
+    
+    # STEP 3: Slice the result
+    result = matmul_array[r1:r2, c1:c2]
+    
+    return result
+
+
+Q4:
+import numpy as np
+
+def sort_birds(birds, age):
+    '''
+    INPUT: birds, age -> 1D numpy arrays
+    OUTPUT: result -> sorted bird 1D array
+    '''
+    
+    # STEP 1: Get the sorted index of age
+    sorted_age_index = np.argsort(age)
+    
+    # STEP 2: Use the index to sort birds
+    result = birds[sorted_age_index]
+    
+    return result
+
+
+
+------Additional Question-------
+AQ1:
+Create a 3X4 matrix filled with values from 10 to 21
+
+AQ2:
+AQ3:
+AQ4:
+AQ5:
+
+import numpy as np
+
+def calculate_mean_age(birds, age):
+    '''
+    INPUT: birds, age -> 1D array
+    
+    OUPUT: mean_age -> float variable
+    '''
+    
+    mean_age = None
+    
+    ## STEP1. Create mask to get Crane birds from birds array
+    mask = birds == 'Cranes'
+    
+    ## STEP2. Get the age of crane birds
+    
+    crane_ages = age[mask]
+    
+    ## STEP 3. Calculate mean age of crane birds
+    
+    mean_age = crane_ages.mean()
+    
+    ## STEP 4. Round off the mean age to 2 decimal points
+    
+    mean_age = round(mean_age,2)
+    
+    
+    
+    return mean_age
+
+AQ6:
+
+import numpy as np
+
+def oldest_bird(birds, age):
+    ''' birds[i] consist of the names of the type of ith bird
+        age[i] consist of the age of ith bird'''
+        
+    ## STEP 1: Get the index of maximum age element
+    max_age_index = np.argmax(age)
+    
+    ## STEP 2: Get the bird with maximum age using the above index
+    old_bird = birds[max_age_index]
+    
+    return old_bird
+
+
+AQ7:
