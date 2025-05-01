@@ -1,0 +1,75 @@
+Q1:
+Boxplot can be used here. It shows that the median age of survivors in females is higher than in non-survivors.
+Bargraph can be used here. It shows that the mean age of survivors is lesser than non-survivors in males.
+
+Q2:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sid = eval(input())
+source = eval(input())
+prof = eval(input())
+df = pd.DataFrame({'Sale ID': sid, 'Source': source, 'Profit':prof})
+
+# Plot the barplot after "bar = "
+bar = sns.barplot(data= df, x = 'Source', y = 'Profit')
+plt.xlabel('Source')
+plt.ylabel('Profit')
+plt.show()
+
+Q3:
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame({'Sale ID': a, 'Selling Price': b, 'Profit': c})
+
+#Create the lineplot in lp
+lp = sns.lineplot(data=df, x='Selling Price', y='Profit', color='red')
+plt.xlabel('Selling Price')
+plt.ylabel('Profit')
+plt.show()
+
+Q4:
+fig, ax = plt.subplots(3, 2)
+
+
+
+AQ1:
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+x = eval(input())
+y = eval(input())
+y1 = eval(input())
+y2 = eval(input())
+
+df = pd.DataFrame({'month_number': x, 'mean_sales': y, 'demo_prod': y1, 'major_prod':y2})
+
+# Set the fig size and fig value
+fig, axs = plt.subplots(1, 3, figsize=[20, 5])
+
+# Plot first subplot 
+axs[0].plot(df['month_number'], df['mean_sales'])
+axs[0].set_title('trend graph')
+axs[0].set_xlabel('months')
+axs[0].set_ylabel('sales')
+
+
+# Plot second subplot
+axs[1].bar(df['month_number'], df['demo_prod'])
+axs[1].set_title('demo prod sales')
+axs[1].set_xlabel('months')
+axs[1].set_ylabel('sales')
+
+
+# Plot third subplot
+axs[2].scatter(df['month_number'], df['major_prod'])
+axs[2].set_title('distribution of major prod sales')
+axs[2].set_xlabel('months')
+axs[2].set_ylabel('scattered points')
+
+plt.show()
