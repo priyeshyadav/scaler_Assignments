@@ -1,0 +1,91 @@
+Q1:
+
+import numpy as np
+def add_padding(mat):
+    '''mat-> NumPy array
+       output-> NumPy array is expected to be returned'''
+
+    # YOUR CODE GOES HERE
+    
+    res = np.pad(mat, pad_width=((1, 1), (1, 1)), mode='constant', constant_values=0)
+    
+    return res
+
+Q2:
+
+import numpy as np
+
+def split(arr):
+    '''
+    INPUT: arr -> 2D array
+    
+    OUTPUT: subarrays -> list of 2D arrays
+    '''
+    
+    subarrays = None
+    ### CODE starts here 
+    subarrays = np.hsplit(arr,(2,3))
+    
+    
+    return subarrays
+
+Q3:
+
+import numpy as np
+
+def split(arr, k):
+    '''
+    INPUT: arr, k
+    
+    OUTPUT: split_arr -> list of arrays
+    '''
+    
+    split_arr = None
+    
+    ## CODE starts here
+    split_arr = np.split(arr,k)
+    
+    
+    
+    return split_arr
+
+Q4: C
+
+Q5: A C 
+
+Q6: B 
+
+Q7: 
+np.hstack((arr, arr[:,[0]])).shape= (3,4)
+np.hstack((arr, arr[:,0])) => Throws Error
+
+
+------Additional Question ------
+AQ1: hstack()
+
+AQ2: Option A will throw an error.
+
+AQ3: vsplit()
+
+AQ4: 
+AQ5:
+
+AQ6:
+import numpy as np
+
+def rearrange_image(data, num_splits):
+    # Step 1: Split the image horizontally into num_splits equal parts
+    sections = np.array_split(data, num_splits, axis=0)
+
+    # Step 2: Rearrange the sections
+    # Move the last section to the front, and shift others down
+    rearranged_sections = [sections[-1]] + sections[:-1]
+
+    # Step 3: Concatenate all sections back together
+    result = np.concatenate(rearranged_sections, axis=0)
+
+    return result
+
+
+
+

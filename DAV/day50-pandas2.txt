@@ -1,0 +1,167 @@
+Q1: A B D
+
+Q2:
+import pandas as pd
+
+def max_income(df):
+    '''
+    INPUT: df -> dataframe
+    
+    OUTPUT: result -> String
+    
+    '''
+    
+    ### STEP 1: Get the row with maximum income
+    
+    max_income = df.loc[df['income'] == df['income'].max()]
+    
+    ### STEP 2: On above result, Filter the name column and extract string value from it
+    
+    result = max_income['name'].values[0]
+    
+    return result
+
+Q3:
+import pandas as pd
+
+def calc_density(df): 
+    '''
+    INPUT: df -> dataframe
+    
+    OUTPUT: result -> A series
+    '''
+    
+    ## STEP 1: calculate population density
+    
+    pop_den = df['population']/df['area']
+    
+    ## STEP 2: sort the values
+    
+    result = pop_den.sort_values()
+    
+    return result
+
+Q4:
+import pandas as pd
+def specific_customers(df):
+    ''' df is a dataframe with columns ['name', 'profession', 'gender', 'age', 'review', 'rating']
+        Output -> A series with required names is expected to be returned'''
+    # YOUR CODE GOES HERE
+    
+    # Select male professionals
+    df_new = df[df['gender'] =='male']
+    
+    # Filter for age group 23-30
+    df_new = df_new[(df_new['age'] >=23) & (df_new['age'] <=30)]
+    
+    return df_new['name']
+
+Q5:
+Axis = 0
+
+Q6:
+import pandas as pd
+
+def add_and_remove(df, data, out):
+    '''
+    Input:
+    df -> The dataframe passed as input
+    data -> The list of list variable containing the rows to append
+    out -> the variable containing the row index value to be removed
+    
+    Output:
+    df -> return the dataframe df after doing the above operations
+    '''
+    
+    # Add the rows
+    df = pd.concat([df, pd.DataFrame(data, columns=df.columns)], ignore_index=True)
+    
+    # Remove the row at the given index (from the new DataFrame)
+    df = df.drop(out)
+    
+    return df
+
+Q7: 2 3
+
+Q8:
+import pandas as pd
+
+def merge(df1, df2):
+    '''
+    INPUT: df1, df2 -> dataframe
+    OUTPUT: result -> dataframe containing common cust_id rows
+    '''
+    result = pd.merge(df1, df2, on='cust_id', how='inner')
+    return result
+
+
+Q9: B
+
+
+----Additional Question ----
+
+AQ1:Given for loop will delete all the columns having only one unique value.
+
+AQ2:
+import pandas as pd
+def population_df(df):
+    '''df is a dataframe with columns ['Country', 'Year', 'Population', 'Continent']
+       Output -> A dataframe is expected to be returned.'''
+       
+    # Filter the dataframe for records greater than 10 million
+    df_filtered = df[df['Population']> 10000000]
+    
+    # Sort the filtered dataframe first by year, then by population
+    df_sorted = df_filtered.sort_values(['Year','Population'], ascending=[True, True])
+    
+    # Don't modify this line of code    
+    return df_sorted.reset_index(drop = True)
+
+AQ3:
+import pandas as pd
+
+def calculate(df):
+    '''
+    INPUT: df -> pandas dataframe
+    
+    OUTPUT: result -> float
+    '''
+    
+    ### STEP 1 : filter employees with medium income
+    
+    medium_income = df[df['income']=='medium']
+    
+    ### STEP 2: calculate count of medium income employees
+    
+    medium_income_count = medium_income.shape[0]
+    
+    ### STEP 3: calculate percentage of medium income employees
+    
+    result = round((medium_income_count / df.shape[0])*100,1)
+    
+    return result
+
+AQ4:
+import pandas as pd
+
+def get_amount(customer, orders, name):
+    '''
+    INPUT: 
+        customer, orders -> dataframe
+        name -> string
+        
+    OUTPUT: 
+        (merged_df, sum_amount) -> tuple of (dataframe, float)
+    '''
+    
+    ## STEP 1: merge customer and orders dataframe
+    merged_df = pd.merge(customer, orders, on='cust_id', how='left')
+    
+    ## STEP 2: calculate sum of amount for given name
+    sum_amount = merged_df[merged_df['name'] == name]['amount'].sum()
+    
+    return merged_df, sum_amount
+
+
+AQ5:
+['name', 'rankx', 'ranky']
