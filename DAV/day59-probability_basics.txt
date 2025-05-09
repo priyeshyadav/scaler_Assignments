@@ -1,0 +1,27 @@
+Q1: {HH, HT, TH, TT}
+Q2: 40%
+Q3: 8/12 or 2/3
+
+Q4: 0.35
+P(B Union I) = 0.75
+P(I Union A) = 0.6
+P(B Union I) + P(I Union A) = 1.35
+P(B) + P(I) - P(B Intersect I) + P(I) + P(A) - P(A Intersect I) = 1.35
+P(I) + [P(B) + P(I) + P(A)] - [P(B Intersect I) + P(A Intersect I)] = 1.35
+since these are disjoined sets, Intersection are actually 0
+P(I) + [P(B) + P(I) + P(A)] - 0 = 1.35
+also Student will belong to atleast 1 cohort hence [P(B) + P(I) + P(A)]= 1
+P(I) + 1 - 0 = 1.35
+P(I) = 0.35
+
+Q5: 10/36
+Q6: 1/3
+
+
+-----------Additional Question ------
+AQ1: 3/7
+AQ2: 2^3 = 8
+AQ3: 20%
+AQ4: 2^2 = 4
+AQ5: 10
+AQ6: 2^3 = 8
