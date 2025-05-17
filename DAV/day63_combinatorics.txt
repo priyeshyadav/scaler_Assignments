@@ -1,0 +1,96 @@
+Q1 : 720
+
+10 P 3 since no repeatition is allowed.
+or 
+10 * 9 * 8
+
+Q2: 255
+
+Total 4 possibility : Gold, Silver, Bronze, Lost
+Total 4 Games
+repeatition is allowed 4**4 = 256
+now aleast 1 medal is won so we need to subtract condition where no medal is won
+which is only 1 possibility i.e. Lost, Lost, Lost, Lost
+
+256-1 : 255
+
+Q3: 0.199
+
+total member 15
+team size required 5
+
+choosing 5 membem team out of 15 membem is 15c5 i.e. 3003
+now 
+choosing 2 ds from 5 is 5c2 i.e. 10
+choosing 1 de from 4 is 4c1 i.e. 4
+choosing 2 da from 6 is 6c2 i.e. 15
+
+choosing them all is 10*4*15 = 600
+
+
+probability is 600/3003 = .199
+
+
+Q4 : 2/20C10 
+
+Ways of parking 20 cars is 20 slot is 20P20 , here order matter and no repeating is possible hence P & not C 
+
+Getting alternate India and Foriegn car
+    10 India cars 10 slots = 10P10
+    10 Foriegn cars 10 slots = 10P10
+or 
+Getting alternate Foriegn and Indian car
+    10 Foriegn cars 10 slots = 10P10
+    10 India cars 10 slots = 10P10
+
+overall probability
+
+{(10P10 * 10P10) + (10P10 * 10P10 )}/{20P20}
+
+{(10P10*10P10)(1+1)}/{20P20}
+
+10! * 10 ! * 2 / 20!
+
+2* (10! * 10!)/(20!)
+
+2* {(20-10)! * 10!}/20!
+
+now 20C10 is 20!/{(20-10)! * 10!}
+so 1/20C10 is {(20-10)! *10!}/20!
+
+2 * 1/20C10
+
+2/20C10
+
+Q5:  648, 252, 873
+
+3 digit number without 5 : 8 * 9 * 9 = 648
+
+3 digit number with atleast 1 5 : total number - number without 5
+ 9 * 10 * 10 - 648
+ 900 - 648 : 252
+
+ 3 gigit number where 5 is atmost once
+ all number - number where 5 is 3 times - numbe where 5 is 2 times
+
+ all number = 9 * 10 * 10 
+ 3 digit number where 5 is 3 times 1 * 1 * 1 = 1 , only possible numbeb is 555
+ 3 git number where 5 is present 2 times
+    _55 : 0 & 5 cant come : 8
+    5_5 : 5 cant come : 9
+    55_ : 5 cant come : 9
+
+    total number : _55 or 5_5 or 5_5 
+    hence  8+9+9 = 26
+
+overall 900 - 1 - 26 = 873
+
+-------Additional Question-----
+AQ1: 10 * 10  * 26 * 26 * 26 = 1757600
+AQ2: 5/13
+
+(6c1 * 5c1 )/ 13c2
+( 6 * 5) / ( 13 * 12 * 1/2)
+ (6*5*2)/(13*12)
+ 5/13
+
