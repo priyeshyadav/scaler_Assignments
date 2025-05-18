@@ -1,0 +1,163 @@
+Q1:
+import pandas as pd
+
+def calc_income(df):
+    '''
+    INPUT: df - > dataframe
+    
+    OUTPUT: result -> dataframe
+    '''
+    
+    result = df.groupby("gender")["income"].mean().to_frame()
+    
+    
+    return result
+    
+
+Q2:
+import pandas as pd
+
+def get_marks(df):
+  ### STEP 1: group the df using subject and get max marks
+  max_marks = df[['subject','marks']].groupby(by =['subject']).max()
+  ### STEP 2: reset the index
+  max_marks = max_marks.reset_index()
+  ### STEP 3: merge with original df to get roll id
+  result = max_marks.merge(df, on= ['subject', 'marks'])
+  return result
+
+Q3:
+import pandas as pd
+
+def replace_ages(a):
+    '''a is a dataframe with columns ['name', 'age']
+       Output: A dataframe with same columns but with changed records as per required is expected to be returned'''
+
+    # Define bins and corresponding labels
+    bins = [0, 18, 51, float('inf')]
+    labels = ['kid', 'adult', 'senior']
+
+    # Use pd.cut to assign labels
+    a['age'] = pd.cut(a['age'], bins=bins, labels=labels, right=False)
+    return a
+
+or 
+
+import pandas as pd
+
+def replace_ages(a):
+    '''a is a dataframe with columns ['name', 'age']
+       Output: A dataframe with same columns but with changed records as per required is expected to be returned'''
+
+    change=lambda x: 'senior' if x>50 else 'adult' if x>=18 else 'kid'
+    a['age']=a['age'].apply(change)
+    return pd.DataFrame(a,columns=['name','age'])
+
+or 
+
+def age_conert(a):
+  if a <=18:
+    return 'kid'
+  elif a>=18 and a<50:
+    return 'adult'
+  else:
+    return 'senior'
+
+df['age'] = df['age'].apply(age_conert)
+return df
+
+
+Q4: Equate the axis to 1.
+
+Q5:
+import pandas as pd
+
+def filter(df, k):
+    '''
+    INPUT: 
+        df -> dataframe
+        k -> cutoff (int)
+        
+    OUTPUT:
+        result -> dataframe
+    '''
+    
+    ### STEP 1 : Create mask
+    
+    mask = df['marks'] >= k
+    
+    ### STEP 2: Use mask to filter rows
+    
+    result = df.loc[mask]['name']
+    
+    return result
+
+Q6: df.name.isin('rick')    #isin require a list df.name.isin(['rick']) will work.
+
+------------------Additional marks--------------------------
+
+AQ1: WORLD WAR 2 GLIDERS ASSTD DESIGNS
+
+#code
+
+!gdown https://drive.google.com/file/d/1UViHcT4lKDsTfc97gBqIvds25uHe4b5e/
+df_sales = pd.read_csv('/content/sales.csv')
+df_sales.groupby('Description')['Quantity'].sum().sort_values(ascending=False).head(1)
+
+
+
+AQ2:
+import pandas as pd
+
+def group_the_data(df):
+    '''
+    input:
+    df -> the dataframe provided to the function
+    
+    output:
+    result -> the grouped by data as per required in the question
+    '''
+    result = None
+    
+    # Your Code Starts here
+    result = df.groupby(['salesman_id','customer_id'])['ord_no'].count().reset_index()
+    
+    # Your Code ends here
+    return result
+
+AQ3:
+import pandas as pd
+def student_filter(df):
+    '''
+    input:
+    df -> the dataframe provided to the function
+    
+    output:
+    df_new -> the selected students of the dataframe
+    '''
+    df_new = None
+    
+    # Your code starts here
+    df_new = df[((df['Stream'] == 'Commerce') | (df['Stream'] == 'Arts')) & (df['Percentage'] > 75)]
+    df_new = df_new['Name']
+
+    # Your code ends here
+    return df_new
+
+AQ4: 5303
+#code used 
+!gdown https://drive.google.com/file/d/1UViHcT4lKDsTfc97gBqIvds25uHe4b5e
+df_sales = pd.read_csv('/content/sales.csv')
+mask = df_sales['Country'] == 'United Kingdom'
+df_sales[mask]['StockCode'].nunique()
+# Next line can be used as well
+#df_sales.loc[mask, 'StockCode'].nunique()
+
+AQ5: 581483, 16446
+#code used
+!gdown https://drive.google.com/file/d/1UViHcT4lKDsTfc97gBqIvds25uHe4b5e
+df_sales = pd.read_csv('/content/sales.csv')
+df_sales['purchase_amount'] = df_sales['Quantity'] * df_sales['Price']
+df_sales.sort_values(by='purchase_amount', ascending=False).head(1)[['Invoice','Customer ID']]
+
+
