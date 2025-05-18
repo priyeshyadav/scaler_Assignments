@@ -25,7 +25,7 @@ def select_rows(df, r1, r2):
     '''
     
     # Select the rows r1 to r2
-    df_selected = df[r1:r2]
+    df_selected = df.iloc[r1:r2]
     
     # Select the columns "name" and "amt"
     df_new = df_selected[['name','amt']]
