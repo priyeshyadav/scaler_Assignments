@@ -6,7 +6,7 @@ Q5:2.49
 Q6:88.8
 
 ----------------Additional Question-----
-AQ1:
-AQ3:
-AQ3:
-AQ4:
+AQ1:8000 , 4000, 4000
+AQ2: 57.5
+AQ3: 88.8
+AQ4: Green
