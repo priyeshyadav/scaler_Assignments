@@ -1,0 +1,40 @@
+Q1: 
+People who were alone and survived were found to have a bit higher median age than those who did not survive.
+People who were not alone and survived were found to have lower median age than those who did not survive.
+
+Q2:
+Customers who churn, on average, pay a higher MonthlyCharges, irrespective of the type of contract
+
+Q3:a,b,c
+
+Q4:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sid = eval(input())
+sp = eval(input())
+prof = eval(input())
+df = pd.DataFrame({'Sale ID': sid, 'Selling Price': sp, 'Profit':prof})
+
+# Plot the jointplot after "jp = "
+jp = sns.jointplot(data=df,x='Selling Price',y='Profit',kind="reg",color='green')
+jp.ax_joint.set_xlim(500,1500)
+jp.ax_joint.set_ylim(100,250)
+
+
+-------Additional Question----------
+AQ1:
+import pandas as pd
+import seaborn as sns
+
+typ = eval(input())
+mnth = eval(input())
+prc = eval(input())
+df = pd.DataFrame({'Product Type': typ, 'Month': mnth, 'Selling Price': prc})
+
+#Plot the boxplot in bp
+bp = sns.boxplot(data=df, x= 'Month', y='Selling Price',hue='Product Type')
+
+AQ2:scatter
