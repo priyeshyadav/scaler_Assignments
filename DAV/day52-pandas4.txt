@@ -1,6 +1,6 @@
-Q1:
-Q2:
-Q4:
+Q1:A 
+Q2: df.groupby([‘Accessories’, ‘customer’]).quantity.sum()
+Q3: A 
 Q4:
 import pandas as pd
 def healthExp(df):
@@ -45,3 +45,27 @@ def lifeExp(df):
     return df
 
 AQ2:
+import pandas as pd
+def timeOfDay(df):
+    # Your Code Goes Here
+    df['pickup'] = pd.to_datetime(df['pickup'])
+    df['dropoff'] = pd.to_datetime(df['dropoff'])
+    def label_hour(dt):
+        hour = dt.hour
+        if hour >=0 and hour < 6:
+            return 'morning'
+        elif hour >=6 and hour <12:
+            return 'day'
+        elif hour >=12 and hour <18:
+            return 'afternoon'
+        else:
+            return 'night'  
+
+    df['time_of_day'] = df['pickup'].apply(label_hour)
+    df_new = df['time_of_day'].value_counts().reindex(['afternoon', 'morning', 'night', 'day']).fillna(0).astype('int64')
+    df_new.index.name = 'time_of_day'
+    df_new.name = 'pickup'
+    df_new = df_new.sort_values(ascending=False)
+    
+    
+    return df_new

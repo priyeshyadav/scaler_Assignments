@@ -35,7 +35,7 @@ plt.show()
 Q4:
 fig, ax = plt.subplots(3, 2)
 
-
+-------Additional Questions-------------
 
 AQ1:
 import matplotlib.pyplot as plt

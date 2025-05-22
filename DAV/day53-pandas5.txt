@@ -1,0 +1,94 @@
+Q1: df[df.isnull().any(axis=1)]
+Q2: This function fills the nan values with 1 and returns None.
+Q3:
+import pandas as pd
+
+def location_divide(df):
+    '''
+    input:
+    df -> the dataframe provided to the function
+    
+    output:
+    df_new -> the new preprocessed dataframe
+    '''
+    
+    ### STEP 1: Split the values into 2 columns using tab ('\t') as delimiter
+    df_new = df['City\tState'].str.split('\t', expand=True)
+    
+    ### STEP 2: Rename the columns appropriately
+    df_new.columns = ['City', 'State']
+    
+    return df_new
+
+Q4 : 2010-08-09
+sales.loc[sales['Country']=='France'].groupby(['Country','InvoiceDate'])['sales'].sum().sort_values(ascending=False)
+
+Q5: 57
+
+Q6: 
+import pandas as pd
+def solve(reg_id, reg_dates):
+    res_df = pd.DataFrame(zip(reg_id, reg_dates), columns=["RID", "RDate"])
+    """
+    input:
+    reg_id -> id of the input dataframe
+    reg_dates -> dates of the input dataframe
+    res_df -> the input dataframe 
+    
+    output:
+    return the resultant dataframe after performing the required operation
+    """
+    # YOUR CODE GOES HERE
+    res_df['RDate']  = pd.to_datetime(res_df['RDate'])
+    res_df['RMonth'] = res_df['RDate'].dt.month
+    res_df['RYear'] = res_df['RDate'].dt.year
+    res_df['RDay'] = res_df['RDate'].dt.day
+    
+    
+    return res_df
+
+-----------------Additional Question-------------
+AQ1: All the mentioned statements are true.
+AQ2:
+import pandas as pd
+
+def solve(string):
+    """
+    Returns a Series object with word count as values and words as the indices.
+    """
+    # Split the string into words
+    words = string.split()
+    
+    # Create a Series from the list of words
+    freq = pd.Series(words).value_counts()
+    
+    # Sort the indices (i.e., the unique words)
+    res = freq.sort_index()
+    
+    return res
+
+AQ3:
+class Solution:
+    # @param A : string
+    # @return a string
+    def solve(self, A):
+        # Map month abbreviation to numeric format
+        month_map = {
+            "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04",
+            "May": "05", "Jun": "06", "Jul": "07", "Aug": "08",
+            "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"
+        }
+
+        # Split input into parts
+        day_str, month_str, year_str = A.split()
+
+        # Extract numeric day (remove 'st', 'nd', 'rd', 'th')
+        day = ''.join(filter(str.isdigit, day_str)).zfill(2)
+
+        # Convert month using the map
+        month = month_map[month_str]
+
+        # Format and return the result
+        return f"{year_str}-{month}-{day}"
+
+
