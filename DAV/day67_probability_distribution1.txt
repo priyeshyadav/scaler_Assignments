@@ -1,0 +1,20 @@
+Q1: 0.14
+
+import scipy.stats as stats
+k,n,p = 10,40,0.25
+stats.binom.pmf(k,n,p)
+
+Q2: 0.77
+import scipy.stats as stats
+#(1-p) = 0.4
+#p = 0.6 
+#Till only 4 person comes up , everyone will get the seat & hence probability is 1
+#so we should do 1 - (P(5) + P(6))
+n, r1, r2, p = 6,5,6,0.6
+1- (stats.binom.pmf(r1,n,p) + stats.binom.pmf(r2,n,p))
+
+Q3: 0.97
+import scipy.stats as stats
+n,k,p = 10,3,0.12
+stats.binom.cdf(k,n,p)
+# code output is 1, hence i have choosen closest number to 1 from options.
