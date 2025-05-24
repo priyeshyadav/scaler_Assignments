@@ -18,3 +18,15 @@ import scipy.stats as stats
 n,k,p = 10,3,0.12
 stats.binom.cdf(k,n,p)
 # code output is 1, hence i have choosen closest number to 1 from options.
+
+----------------Additional Question-------------
+AQ1: 0.34
+
+import scipy.stats as stats
+n,r,p = 5,3,0.6
+stats.binom.pmf(r,n,p)
+
+AQ2: 15/16 ~0.93
+import scipy.stats as stats
+n,r,p = 4,3,0.5
+stats.binom.cdf(r,n,p)
