@@ -1,0 +1,40 @@
+Q1: n1 < n2
+Q2: 0.3085
+
+from scipy.stats import norm
+#lets calculate Z score first
+z = (65-60)/10
+#Our favoroable condition is that Z is greater than 0.5
+# we can actually calculate cdf till 0.5 & than subtrcat that from 1 (1 is oveall probability)
+round(1 - norm.cdf(z),4)
+
+Q3: 185
+1.5 = (x - 170)/10
+x = 185
+
+Q4 : 45.35
+from scipy.stats import norm
+mean = 50  # kg
+std_dev = 2  # kg
+# Find the 1st percentile (weight exceeded by 99% of the bags)
+x = norm.ppf(0.01, loc=mean, scale=std_dev)
+
+print(f"The weight exceeded by 99% of the bags is approximately {x:.2f} kg")
+------------Additional Ques------------
+AQ1:135.8
+from scipy.stats import norm
+mean = 119  # kg
+std_dev = 13.1  # kg
+# Find the 1st percentile (weight exceeded by 99% of the bags)
+x = norm.ppf(0.9, loc=mean, scale=std_dev)
+x
+
+
+AQ2: 0.1056
+from scipy.stats import norm
+z = (60-65)/4
+#Our favoroable condition is upto z value
+round(norm.cdf(z),4)
+
+
+AQ3: -1.67
