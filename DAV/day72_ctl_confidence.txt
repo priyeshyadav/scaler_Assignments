@@ -1,0 +1,68 @@
+Q1: 0.7606
+from scipy.stats import norm
+from math import sqrt
+mean , sigma, sample = 90, 15, 35 
+sample_std = sigma / sqrt(sample)
+z1 = (85-mean)/sample_std
+z2 = (92-mean)/sample_std
+p1 = norm.cdf(z1)
+p2 = norm.cdf(z2)
+print((p2 - p1).round(4))
+  
+Q2:
+Yes
+  
+Q3:0.9771
+from scipy.stats import norm
+from math import sqrt
+mean , sigma, sample = 28, 7, 50
+sample_std = sigma / sqrt(sample)
+z1 = (26-mean)/sample_std
+z2 = (31-mean)/sample_std
+p1 = norm.cdf(z1)
+p2 = norm.cdf(z2)
+print((p2 - p1).round(4))
+  
+Q4: [22.432, 25.568]
+from scipy.stats import norm
+from math import sqrt
+norm.interval(0.95, loc=24, scale=8/sqrt(100))
+
+Q5: (73.36, 76.64)
+from scipy.stats import norm
+from math import sqrt
+norm.interval(0.90, loc=75, scale=10/sqrt(100))
+
+------Additional Question-----
+AQ1: 98.73%
+from scipy.stats import norm
+from math import sqrt
+mean , sigma, sample = 5, 0.5, 5
+sample_std = sigma / sqrt(sample)
+z1 = (5.5-mean)/sample_std
+p1 = norm.cdf(z1)
+print(p1)
+  
+AQ2:4.89%
+from scipy.stats import norm
+from math import sqrt
+mean , sigma, sample = 1000, 188, 35
+sample_std = sigma / sqrt(sample)
+z1 = (947.4-mean)/sample_std
+p1 = norm.cdf(z1)
+print(p1)
+
+AQ3:0.0127
+from scipy.stats import norm
+from math import sqrt
+mean , sigma, sample = 900, 50, 20
+sample_std = sigma / sqrt(sample)
+z1 = (875-mean)/sample_std
+p1 = norm.cdf(z1)
+print(p1.round(4))
+
+AQ4:(163.6, 166.3)
+from scipy.stats import norm
+from math import sqrt
+norm.interval(0.90, loc=165, scale=8/sqrt(100))
+
