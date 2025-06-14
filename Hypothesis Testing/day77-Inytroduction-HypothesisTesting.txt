@@ -1,0 +1,15 @@
+Q1 : H0: Diet has no impact on weight; Ha: Diet reduces weight
+Q2: iv
+Q3: More than 45% are actually interested, an it’s not concluded that more than 45% are interested.
+Q4: The consumer group concludes that the soft drink bottles have less than 15 oz. when the mean actually is 15 oz.
+Q5: True Positive, Type - 2 error, Type - 1 error, True Negative
+Q6: a
+Q7: Left tailed test
+Q8 : I. Two tailed test , II. One tailed test.
+
+
+-----Additional Question-------
+AQ1 : H0: Coaching does not improve score; Ha: Coaching improves score
+AQ2: The defendant is guilty, but the judge pronounces him innocent
+AQ3: The bike is safe, but you think it is not safe
+AQ4: Fail to reject the null hypothesis
