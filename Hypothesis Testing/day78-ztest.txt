@@ -1,0 +1,172 @@
+Q1:p-value = 0.186, and hence people from the state are not shorter
+
+import numpy as np
+from scipy.stats import norm, binom, poisson
+
+#Given values
+P_mu = 65
+P_sigma = 2.5 
+Sample = 20
+Sample_mu = 64.5
+alpha = 0.05
+
+def z_value(P_mu, P_sigma, Sample_mu, Sample):
+    z = (Sample_mu - P_mu) / (P_sigma / np.sqrt(Sample))
+    return z
+
+z = z_value(P_mu, P_sigma, Sample_mu, Sample)
+print(f'Value of Z is ',z)
+
+p_value = norm.cdf(z)
+print(f'P value is',p_value)
+
+if p_value < alpha:
+    print("Reject the null hypothesis, People are shorter")
+else:
+    print("Fail to reject the null hypothesis, no evidence that people are shorter")
+
+
+'''
+Value of Z is  -0.8944271909999159
+P value is 0.18554668476134878
+Reject the null hypothesis, People are equal to Populalation Avg
+'''
+
+Q2: The computed z-score is 2.01, and since 1.64 is less than 2.01, the null hypothesis is rejected.
+
+import numpy as np
+from scipy.stats import norm, binom, poisson
+
+#Given values
+P_mu = 500
+P_sigma = 125
+Sample = 70
+Sample_mu = 530
+alpha = 0.05
+z_critical = 1.64
+
+def z_value(P_mu, P_sigma, Sample_mu, Sample):
+    z = (Sample_mu - P_mu) / (P_sigma / np.sqrt(Sample))
+    return z
+
+z = z_value(P_mu, P_sigma, Sample_mu, Sample)
+print(f'Value of Z is ',z)
+
+if z > z_critical:
+    print("Reject the null hypothesis, Avg value increased")
+else:
+    print("Fail to reject the null hypothesis, Avg value is Same")
+
+
+Q3:The computed z-score is 1.64, and since 1.64 is less than 1.96, the null hypothesis cannot be rejected.
+
+#usage of +_1.96 suggests its two tailed test & enve we need to compare abs(z) with critical_value.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+
+#Given values
+P_mu = 1.7
+P_sigma = 0.5
+Sample = 30
+Sample_mu = 1.85
+alpha = 0.05
+z_critical = 1.96
+
+def z_value(P_mu, P_sigma, Sample_mu, Sample):
+    z = (Sample_mu - P_mu) / (P_sigma / np.sqrt(Sample))
+    return z
+
+z = z_value(P_mu, P_sigma, Sample_mu, Sample)
+print(f'Value of Z is ',z)
+
+if abs(z) > z_critical:
+    print("Reject the null hypothesis, Avg value increased")
+else:
+    print("Fail to reject the null hypothesis, Avg value is Same")
+
+
+
+Q4:311.6125
+
+import numpy as np
+from scipy.stats import norm, binom, poisson
+
+population_mu = 250
+population_sigma = 30
+confidence = .96
+alpha = 1 - confidence
+
+z = norm.ppf(1- alpha/2)  # /2 is done as its a 2 tailed test. The remaining .04 confidence is divided on both sides of curve.
+x_bar_max = population_mu + z * population_sigma
+print(x_bar_max)
+x_bar_min = population_mu - z * population_sigma
+print(x_bar_min)
+
+Q5:(4.264,4.735), The average time spent on the website is not 4.0 minutes
+
+import numpy as np
+from scipy.stats import norm, binom, poisson
+
+sample = 100
+sample_mu = 4.5
+population_mu = 4
+sigma = 1.2
+confidence = 0.95
+alpha = 1 - confidence
+z_critical = norm.ppf(1 - alpha/2) #Since its a two tailed test
+print(z_critical)
+standard_error = sigma/np.sqrt(sample)
+print(standard_error)
+margin_of_error = z_critical * standard_error
+print(margin_of_error)
+lower_bound = sample_mu - margin_of_error
+upper_bound = sample_mu + margin_of_error
+print(lower_bound,upper_bound)
+
+if lower_bound <= population_mu <= upper_bound:
+    print("Null hypothesis is accepted")
+else:
+    print("Null hypothesis is rejected")
+
+
+
+Q6:
+
+Q7:p-value: 1.214e-06, Candidates who study at this coaching institution have more IQ than an average high school student.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+
+#Given values
+P_mu = 100
+P_sigma = 15
+Sample = 50
+Sample_mu = 110
+alpha = 0.05
+
+def z_value(P_mu, P_sigma, Sample_mu, Sample):
+    z = (Sample_mu - P_mu) / (P_sigma / np.sqrt(Sample))
+    return z
+
+z = z_value(P_mu, P_sigma, Sample_mu, Sample)
+print(f'Value of Z is ',z)
+
+p_value = 1-norm.cdf(z)
+print(f'P value is',p_value)
+
+if p_value < alpha:
+    print("Reject the null hypothesis, IQ is Higher")
+else:
+    print("Fail to reject the null hypothesis, IQ is Same")
+
+
+'''
+Value of Z is  4.714045207910317
+P value is 1.2142337364462463e-06
+Reject the null hypothesis, IQ is Higher
+'''
+
+Q8:
+
+
+
+

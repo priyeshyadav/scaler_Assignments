@@ -8,6 +8,11 @@
                 <th>Link</th>
             </tr>
             <tr>
+                <td>4</td>
+                <td>Hypothesis Testing</td>
+                <td><a href="https://github.com/priyeshyadav/scaler_Assignments/tree/main/Hypothesis%20Testing" target="_blank">HT Assignments</a></td>
+            </tr>
+            <tr>
                 <td>3</td>
                 <td>Data Analysis & Visulization</td>
                 <td><a href="https://github.com/priyeshyadav/scaler_Assignments/tree/main/DAV" target="_blank">DAV Assignments</a></td>
