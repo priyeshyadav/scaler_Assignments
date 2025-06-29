@@ -130,7 +130,7 @@ else:
 
 
 
-Q6:
+Q6:The probability of correctly rejecting a false null hypothesis.
 
 Q7:p-value: 1.214e-06, Candidates who study at this coaching institution have more IQ than an average high school student.
 import numpy as np
@@ -166,7 +166,101 @@ Reject the null hypothesis, IQ is Higher
 '''
 
 Q8:
+from scipy.stats import norm, binom, poisson
+import numpy as np
+sample = 50
+sample_mean = 243.5
+sigma = 229.5
+population_mean = 300
+alpha = 0.05
+
+#Ho Population mean is 300 
+#Ha Population mean is not 300
+#This is 2 sided test
 
 
+z_value = (sample_mean - population_mean)/(sigma/np.sqrt(sample))
+#z_value is -1.74
+
+p_value = 2 * (1-norm.cdf(abs(z_value))) # Double the value as its two sided test, same reason for abs(z)
+#p_value is 0.0817
+
+if p_value < alpha:
+    print("Reject Ho")
+else:
+    print("Failed to Reject Ho")
 
 
+----------------------------Additional Question------------------------------
+AQ1 : -1
+sample_mean = 750
+sigma = 50
+population_mean = 800
+cohens_d = (sample_mean - population_mean) / sigma
+print(cohens_d)
+
+AQ2: 3.634
+
+population_mean = 3.5
+sample = 45
+sample_avg = 3.72
+sigma = 0.7
+z_critical = 1.28
+#z_crtical = (critical_sample_mean - population_mean)/(sigma/np.sqrt(sample))
+critical_sample_mean = z_critical * (sigma/np.sqrt(sample)) + population_mean
+print(critical_sample_mean)
+
+AQ3:p-value = 0.03, and hence students from the coaching center are better
+
+
+import pandas as pd
+import numpy as np
+from scipy.stats import norm, binom, poisson
+population_abg = 150
+sigma = 8.5
+sample = 10
+sample_avg = 155
+alpha = 0.05
+
+#Ho = Student are not better
+#Ha = Students are better
+#test = Right Tailed
+z = (sample_avg - population_abg)/(sigma/np.sqrt(sample))
+print(z)
+
+p_value = 1-norm.cdf(z)
+print(p_value)
+
+if p_value < aplha:
+    print("Reject Ho, Students are better")
+else:
+    print("Fail to reject Ho, Students are not better")
+
+AQ4: 
+pvalue = 0.000889 ; Reject the null hypothesis; The average delivery time is greater than 3 days
+Z-score = 3.125
+
+
+import pandas as pd
+import numpy as np
+from scipy.stats import norm, binom, poisson
+population_avg = 3
+sample = 25
+sample_avg = 3.5
+sigma = 0.8
+alpha = 0.05
+
+#Ho = Avearage time is 3 day
+#Ha = Average time is greater than 3 day
+#test = right sided test
+
+z = (sample_avg - population_avg)/(sigma/np.sqrt(sample))
+print(z)
+
+p_value = 1-norm.cdf(z)
+print(p_value)  
+
+if p_value < alpha:
+    print("Reject Ho, Average time is greater than 3 day")
+else:
+    print("Fail to reject Ho, Average time is 3 day")
