@@ -1,0 +1,280 @@
+Q1:2.4532, Hourly wages in plant 'A' are higher than those in plant 'B'.
+
+import numpy as np
+from scipy.stats import norm, binom, poisson
+plantA_Sample = 150
+plantA_Mean = 2.87
+plantA_std = 1.08
+plantB_Sample = 200
+plantB_Mean = 2.56
+plantB_std = 1.28
+aplha = 0.01
+#Ho is hourly wages paid by both plant are equal
+#Ha is hourly wages paid by A are higher than B
+#Test - Ride side
+#This is two sample Z test
+
+z_score = (plantA_Mean - plantB_Mean) / np.sqrt((plantA_std**2 / plantA_Sample) + (plantB_std**2 / plantB_Sample))
+print(z_score)
+
+p_value = 1 - norm.cdf(z_score)
+print(p_value)
+
+if p_value < aplha:
+  print("Reject Ho")
+else:
+  print("Fail to reject Ho")
+
+'''
+2.453219634102559
+0.007079193063952549
+Reject Ho
+'''
+
+Q2: P-value: 0.1791, There is no significant evidence that Analyst Y writes less complex code compared to Analyst X.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+Analyst_x = [15, 18, 20, 17, 16, 19, 22, 16, 18, 21, 23, 18, 17, 19, 20, 24, 25, 26, 27, 28, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+Analyst_y = [14, 17, 19, 16, 15, 18, 21, 15, 17, 20, 22, 17, 16, 18, 19, 23, 24, 25, 26, 27, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+#This is two sample Z test
+#Ho : Complexity of queries for both Analyst is same
+#Ha : Analyst Y write less complex queries
+#Test : One side left tailed
+X_sample = len(Analyst_x)
+Y_sample = len(Analyst_y)
+X_mean = np.mean(Analyst_x)
+Y_mean = np.mean(Analyst_y)
+X_std = np.std(Analyst_x, ddof=1)
+Y_std = np.std(Analyst_y, ddof=1)
+aplha = 0.10
+
+Z_value  = (Y_mean- X_mean) / np.sqrt((X_std**2 / X_sample) + (Y_std**2 / Y_sample))
+print(Z_value)
+
+p_value = norm.cdf(Z_value)
+print(p_value)
+
+if p_value < aplha:
+    print("Reject the null hypothesis")
+else:
+    print("Fail to reject the null hypothesis")
+
+'''
+-0.9186781563938095
+0.17913196923296043
+Fail to reject the null hypothesis
+'''
+
+Q3: P-value: 0.01115, Rice and wheat are not equally popular
+import numpy as np
+from scipy.stats import norm, binom, poisson
+#H0 Both are equally popular i.e. Po = 0.5
+#H1 Both are not equally popular i.e. Po != 0.5
+#Test Two tailed test 
+Sample = 1000
+Rice_fav = 540
+alpha = 0.05
+P0 = 0.5
+P_hat = Rice_fav/Sample
+Z = (P_hat - P0)/np.sqrt((P0*(1-P0))/Sample)
+print(Z)
+p_val = 2 * (1 - norm.cdf(np.abs(Z)))
+print(p_val)
+if p_val < alpha:
+    print("Reject the null hypothesis")
+else:
+    print("Fail to reject the null hypothesis")
+'''
+2.5298221281347057
+0.011412036386001523
+Reject the null hypothesis
+'''
+
+
+Q4:P-value: 0.00039, There is evidence to suggest that the proportion of registered voters supporting the bill is greater than 0.60
+import numpy as np
+from scipy.stats import norm, binom, poisson
+sample = 750
+support = 495
+P0 = 0.60
+alpha = 0.10
+p_hat = support / sample
+#H0 : Dont vote as supporting is not greater than 0.60
+#H1 : Vote as suporting is greater than 0.60
+#test : Right Tailed test
+z_value = (p_hat - P0)/np.sqrt((P0*(1-P0))/sample)
+print(z_value)
+p_value = 1 - norm.cdf(z_value)
+print(p_value)
+if p_value < alpha:
+    print("Reject the null hypothesis")
+else:
+    print("Fail to reject the null hypothesis")
+
+'''
+3.354101966249688
+0.0003981150787953913
+Reject the null hypothesis
+'''
+
+Q5 : Null: p = 50%, Alternative: p > 50%
+
+Q6 : P-value: 0.00278, There is a significant difference in the proportion of students selected for Chasers and Seekers positions.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+c_sample = 90
+c_selected = 57
+s_sample = 120
+s_selected = 98
+alpha = 0.10
+#H0 No Diff
+#H1 Diff
+#test two tailed
+c_hat = c_selected / c_sample
+s_hat = s_selected / s_sample
+p_hat = (c_selected + s_selected) / (c_sample + s_sample)
+z = (c_hat - s_hat) / np.sqrt(p_hat * (1 - p_hat) * ((1 / c_sample) + (1 / s_sample)))
+print(z)
+p_val = 2 * (1 - norm.cdf(np.abs(z)))
+print(p_val)
+if p_val < alpha:
+    print("Reject H0")
+else:
+    print("Fail to reject H0")
+
+'''
+-2.990306921349541
+0.002786972588957992
+Reject H0
+'''
+
+Q7 : P-value: 0.3202. There is no significant evidence of higher user satisfaction for Season 2.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+#h0 user satisfaction for S2 & S1 are same
+#h1 user satisfaction for s2 is higher than s1
+#test right one sided test
+s1_sample = 250
+s1_satisfied = 120
+s2_sample = 300
+s2_satisfied = 150
+alpha = 0.05
+s2_hat = s2_satisfied / s2_sample
+s1_hat = s1_satisfied / s1_sample
+p_hat = (s1_satisfied + s2_satisfied) / (s1_sample + s2_sample)
+z = (s2_hat - s1_hat) / np.sqrt(p_hat * (1 - p_hat) * ((1 / s1_sample) + (1 / s2_sample)))
+print(z)
+p_val = 1 - norm.cdf(z)
+print(p_val)
+if p_val < alpha:
+    print("Reject H0")
+else:
+    print("Fail to reject H0")
+
+
+'''
+0.46717659215115714
+0.32018676972652416
+Fail to reject H0
+'''
+
+Q8 : Two-sample z-proportion test, H0: The proportion of satisfied customers is the same for both customer support approaches.
+
+----------------Additional question----
+AQ1 : p-value: 0.0033, There is a significant difference in the mean response times between Server A and Server B.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+a_mean = 120
+a_sample = 30
+a_std = 15
+b_mean = 110
+b_sample = 35
+b_std = 12
+alpha = 0.05
+#h0 mean response time is same
+#h1 means response time is diff
+#test two tailed test
+
+z = (a_mean - b_mean)/np.sqrt(((a_std**2)/a_sample) + ((b_std**2)/b_sample))
+print(z)
+
+p_val = 2  * ( 1 - norm.cdf(abs(z)))
+print(p_val)
+
+if p_val < alpha:
+    print("Reject the null hypothesis")
+else:
+    print("Fail to reject the null hypothesis")
+
+'''
+2.9342948217350298
+0.003343064983343025
+Reject the null hypothesis
+'''
+
+AQ2:P-value: 0.8623, There is no significant evidence to suggest that the archers' actual success rate is greater than 70%.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+p0 = 0.70
+sample = 100
+sucess = 65
+alpha = 0.05
+p_hat = sucess / sample
+#h0 success rate is <= 70%
+#h1 success rate is > 70%
+#test right tailed test
+
+z = (p_hat - p0) / np.sqrt(p0 * (1 - p0) / sample)
+print(z)
+p_value = 1 - norm.cdf(z)
+print(p_value)
+
+if p_value < alpha:
+    print("Reject the null hypothesis")
+else:
+    print("Fail to reject the null hypothesis")
+
+'''
+-1.0910894511799603
+0.8623832379625824
+Fail to reject the null hypothesis
+'''
+
+AQ3: P-value: 2.566e-19, the proportions of Drug A and Drug B are significantly different.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+#H0 two drugs are equally efective
+#h1 two drugs are not equally effective
+#test two sided tests
+alpha = 0.05
+a_hat = 41/194
+b_hat = 351/605
+p_hat = (41+351)/(194+605)
+z = (a_hat-b_hat)/np.sqrt(p_hat*(1-p_hat)*((1/194)+(1/605)))
+print(z)
+p_value = 2*(1-norm.cdf(np.abs(z)))
+print(p_value)
+if p_value < alpha:
+    print("Reject the null hypothesis")
+else:
+    print("Fail to reject the null hypothesis")
+
+
+AQ4: P-value: 0.085. There is no significant difference in high engagement proportions between Account X and Account Y.
+import numpy as np
+from scipy.stats import norm, binom, poisson
+#H0 same engagement
+#h1 diff engagement
+#test two sided tests
+alpha = 0.05
+a_hat = 40/180
+b_hat = 60/200
+p_hat = (40+60)/(180+200)
+z = (a_hat-b_hat)/np.sqrt(p_hat*(1-p_hat)*((1/180)+(1/200)))
+print(z)
+p_value = 2*(1-norm.cdf(np.abs(z)))
+print(p_value)
+if p_value < alpha:
+    print("Reject the null hypothesis")
+else:
+    print("Fail to reject the null hypothesis")
